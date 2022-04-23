@@ -1,3 +1,3 @@
-(function () {
-    console.log('hi, laof')
-})()
+function run() {}
+
+console.log('hi laof')
