@@ -1,8 +1,8 @@
-;(function () {
-  if (!window.username || !window.password) {
+(function (username,password) {
+  if (!username || !password) {
     console.log('please input username and password fk')
     return
   }
 
-  console.log(window.username, window.password)
-})()
+  console.log(username, password)
+})(window.username,window.password)
