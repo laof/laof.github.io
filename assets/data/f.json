@@ -4,7 +4,7 @@
     "name": "Manulife login",
     "title": "manulife login",
     "page": "https://www.baidu.com",
-    "javascript": "fdsaf",
+    "javascript": "https://laof.github.io/assets/js/hi.js",
     "parameter": ["username", "password"]
   },
   {
@@ -12,7 +12,7 @@
     "name": "Runoob testing",
     "title": "roob fk",
     "page": "https://www.runoob.com",
-    "javascript": "fdsaf",
+    "javascript": "https://laof.github.io/assets/js/flutter.js",
     "parameter": []
   },
   {
@@ -20,7 +20,7 @@
     "name": "QQ 下载",
     "title": "QQ home",
     "page": "https://www.qq.com/",
-    "javascript": "fdsaf",
+    "javascript": "https://laof.github.io/assets/js/http.js",
     "parameter": []
   }
 ]
