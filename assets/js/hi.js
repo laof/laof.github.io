@@ -1,1 +1,3 @@
-console.log('hi, laof')
+(function () {
+    console.log('hi, laof')
+})()
