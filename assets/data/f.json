@@ -1,16 +1,16 @@
 [
   {
-    "id": "home",
+    "id": "ml",
     "name": "Manulife login",
-    "title": "manulife login",
+    "title": "Manulife login",
     "page": "https://www.baidu.com",
     "javascript": "https://laof.github.io/assets/js/login.js",
     "parameter": ["username", "password"]
   },
   {
-    "id": "runoob_testing",
+    "id": "not 中国",
     "name": "Runoob testing",
-    "title": "roob fk",
+    "title": "Roob fk",
     "page": "https://www.runoob.com",
     "javascript": "https://laof.github.io/assets/js/flutter.js",
     "parameter": []
