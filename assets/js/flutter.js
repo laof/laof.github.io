@@ -1,3 +1,5 @@
-(function () {
-  return [44, 55, 66, 33, 545454]
-})()
+
+function run(){
+   console.log("hi, Flutter.js")
+}
+
