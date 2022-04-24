@@ -14,13 +14,5 @@
     "page": "https://www.runoob.com",
     "javascript": "https://laof.github.io/assets/js/flutter.js",
     "parameter": []
-  },
-  {
-    "id": "qqdownload",
-    "name": "QQ 下载",
-    "title": "QQ home",
-    "page": "https://www.qq.com/",
-    "javascript": "https://laof.github.io/assets/js/http.js",
-    "parameter": []
   }
 ]
