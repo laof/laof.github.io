@@ -11,11 +11,9 @@ function run(a, b) {
 
   if (location.protocol.indexOf('http') == -1) {
     return __ajax().get(api).then(function (response, XMLHttpRequest) {
-      if (XMLHttpRequest.status == 200) {
-        console.log('network online.');
-      } else {
-        console.log('access faile: offLine or not found ?');
-      }
+      console.log('network online.');
+    }).catch(function(){
+      console.log('access faile: offLine or not found ?');
     });
   }
 
