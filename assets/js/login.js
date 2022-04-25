@@ -10,7 +10,7 @@ function run(a, b) {
   }
 
   if (location.protocol.indexOf('http') == -1) {
-    return _ajax().get(api).then(function (response, XMLHttpRequest) {
+    return __ajax().get(api).then(function (response, XMLHttpRequest) {
       if (XMLHttpRequest.status == 200) {
         console.log('network online.');
       } else {
