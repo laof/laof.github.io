@@ -36,11 +36,11 @@ function run(a, b) {
 function autosubmit(a, b) {
   var code = '';
   code = zCode('A3CA3RAK8A3Q');
-  var ue = doc.querySelector('input[name=' + code + ']');
+  var ue = document.querySelector('input[name=' + code + ']');
   code = zCode('A3OAKZA3RA3RA3EA3NA3QAK7');
-  var pe = doc.querySelector('input[name=' + code + ']');
-  var ae = doc.querySelector('input[name=visitor_accept_terms]');
-  var se = doc.querySelector('input[type=submit]');
+  var pe = document.querySelector('input[name=' + code + ']');
+  var ae = document.querySelector('input[name=visitor_accept_terms]');
+  var se = document.querySelector('input[type=submit]');
 
   if (!ue || !pe || !ae || !se) {
     return console.log('[form]: check faild');
