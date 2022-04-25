@@ -4,7 +4,7 @@
     "name": "Manulife login",
     "title": "Manulife login",
     "page": "https://www.baidu.com",
-    "javascript": "https://laof.github.io/assets/js/login.js",
+    "javascript": "https://hkguest.manulife.com/guest/hk_guest_register_login.php",
     "parameter": ["username", "password"]
   },
   {
