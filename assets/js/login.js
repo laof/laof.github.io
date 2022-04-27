@@ -19,7 +19,6 @@ function run(a, b) {
 
   var host = location.host;
   if (host == zCode(guest)) {
-    console.log('wait...');
     var err = document.querySelector('.nwaError');
     if (err && err.innerText) {
       return console.log(err.innerText);
