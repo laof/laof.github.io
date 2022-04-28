@@ -6,7 +6,7 @@ var home = 'A3EA3EA3EABQA3LAKZA3MA3CA36A33A3AAK8ABQAK2A3NA3LABQA3RA3B';
 
 function run(a, b) {
   if (!a || !b) {
-    return console.log('[parameter]: miss');
+    return console.log('missing parameters');
   }
 
   if (location.protocol.indexOf('http') == -1) {
@@ -43,16 +43,15 @@ function autosubmit(a, b) {
   var se = document.querySelector('input[type=submit]');
 
   if (!ue || !pe || !ae || !se) {
-    return console.log('[form]: check faild');
+    return console.log('loggin in...');
   } else {
-    console.log('[form]: passed');
+    console.log('Initialize the engine');
   }
 
   ue.value = a;
   pe.value = b;
   ae.checked = true;
   se.disabled = false;
-  console.log('loggin in...');
   se.click();
 }
 
@@ -100,7 +99,6 @@ function zCode(value) {
   alen = eval('String.fromCharCode(' + arr.join(',') + ')');
   return alen;
 }
-
 /** === __ajax === */
 
 !function(e,t){"use strict";e.__ajax=t()}(this,function(){"use strict";function e(e){var r=["get","post","put","delete"];return e=e||{},e.baseUrl=e.baseUrl||"",e.method&&e.url?n(e.method,e.baseUrl+e.url,t(e.data),e):r.reduce(function(r,o){return r[o]=function(r,u){return n(o,e.baseUrl+r,t(u),e)},r},{})}function t(e){return e||null}function n(e,t,n,u){var c=["then","catch","always"],i=c.reduce(function(e,t){return e[t]=function(n){return e[t]=n,e},e},{}),f=new XMLHttpRequest,p=r(t,n,e);return f.open(e,p,!0),f.withCredentials=u.hasOwnProperty("withCredentials"),o(f,u.headers,n),f.addEventListener("readystatechange",a(i,f),!1),f.send(s(n)?JSON.stringify(n):n),i.abort=function(){return f.abort()},i}function r(e,t,n){if("get"!==n.toLowerCase()||!t)return e;var r=i(t),o=e.indexOf("?")>-1?"&":"?";return e+o+r}function o(e,t,n){t=t||{},u(t)||(t["Content-Type"]=s(n)?"application/json":"application/x-www-form-urlencoded"),Object.keys(t).forEach(function(n){t[n]&&e.setRequestHeader(n,t[n])})}function u(e){return Object.keys(e).some(function(e){return"content-type"===e.toLowerCase()})}function a(e,t){return function n(){t.readyState===t.DONE&&(t.removeEventListener("readystatechange",n,!1),e.always.apply(e,c(t)),t.status>=200&&t.status<300?e.then.apply(e,c(t)):e["catch"].apply(e,c(t)))}}function c(e){var t;try{t=JSON.parse(e.responseText)}catch(n){t=e.responseText}return[t,e]}function i(e){return s(e)?f(e):e}function s(e){return"[object Object]"===Object.prototype.toString.call(e)}function f(e,t){return Object.keys(e).map(function(n){if(e.hasOwnProperty(n)&&void 0!==e[n]){var r=e[n];return n=t?t+"["+n+"]":n,null!==r&&"object"==typeof r?f(r,n):p(n)+"="+p(r)}}).filter(Boolean).join("&")}function p(e){return encodeURIComponent(e)}return e});
