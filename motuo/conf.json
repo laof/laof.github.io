@@ -4,13 +4,15 @@
     "name": "Manulife login",
     "javascript": "https://laof.github.io/motuo/login.js",
     "page": "https://hkguest.manulife.com/guest/hk_guest_register_login.php",
-    "parameter": ["username", "password"]
+    "parameter": ["username", "password"],
+    "variable": ["MFC-Guest"]
   },
   {
     "version": "v0.0.1",
     "name": "Tests",
     "page": "https://nodejs.org/en",
     "javascript": "https://laof.github.io/motuo/test.js",
-    "parameter": []
+    "parameter": [],
+    "variable": []
   }
 ]
