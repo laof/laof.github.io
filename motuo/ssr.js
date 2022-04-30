@@ -32,6 +32,8 @@ function run() {
     console.log('SSR:' + ssr.length)
     console.log('SS:' + ss.length)
     console.log('total:' + list.length + ', please copy')
+  } else {
+    console.log('not found data,please update job')
   }
   return list
     .map(function (data) {
