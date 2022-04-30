@@ -35,11 +35,11 @@ function run() {
   if (list.length) {
     console.log(txt)
     var log = [
-      'ssr: ' + ssr.length,
-      'ss: ' + ss.length,
-      'total: ' + total.length,
+      'ssr:' + ssr.length,
+      'ss:' + ss.length,
+      'total:' + total.length,
     ]
-    console.log(log.join(' '))
+    console.log(log.join(' ') + ', please to copy')
   } else {
     console.log('not found data, please upgrade job.')
   }
