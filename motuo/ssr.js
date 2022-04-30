@@ -29,9 +29,9 @@ function run() {
   var ss = getList(document.body.innerHTML, 'ss')
   var list = [].concat(ssr, ss)
   if (list.length) {
-    console.log('SSR:' + ssr.length)
-    console.log('SS:' + ss.length)
-    console.log('total:' + list.length + ', please copy')
+    console.log('SSR：' + ssr.length)
+    console.log('SS：' + ss.length)
+    console.log('total：' + list.length + ', please copy')
   } else {
     console.log('not found data, please upgrade job.')
   }
