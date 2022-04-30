@@ -27,12 +27,12 @@ function getList(text, key) {
 function run() {
   var ssr = getList(document.body.innerHTML, 'ssr')
   var ss = getList(document.body.innerHTML, 'ss')
-  var list = [].concat(ssr, ss)
-  var txt = list.map(function (data) {
+  var total = [].concat(ssr, ss)
+  var txt = total.map(function (data) {
     return data.value
   })
   txt = txt.join('\n\n')
-  if (list.length) {
+  if (total.length) {
     console.log(txt)
     var log = [
       'ssr:' + ssr.length,
