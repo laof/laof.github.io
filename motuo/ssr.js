@@ -1,11 +1,11 @@
+var reg = {
+  ss: /ss:\/\/(.*?)(?=[\r\n,]|<\/)/g,
+  ssr: /ssr:\/\/(.*?)(?=[\r\n,]|<\/)/g,
+  vmess: /vmess:\/\/(.*?)(?=[\r\n,]|<\/)/g,
+}
+
 function getList(text, key) {
   var values = []
-  var reg = {
-    ss: /ss:\/\/(.*?)(?=[\r\n,]|<\/)/g,
-    ssr: /ssr:\/\/(.*?)(?=[\r\n,]|<\/)/g,
-    vmess: /vmess:\/\/(.*?)(?=[\r\n,]|<\/)/g,
-  }
-
   if (!reg[key]) {
     return values
   }
@@ -29,9 +29,9 @@ function run() {
   var ss = getList(document.body.innerHTML, 'ss')
   var list = [].concat(ssr, ss)
   if (list.length) {
-    console.log('SSR：' + ssr.length)
-    console.log('SS：' + ss.length)
-    console.log('total：' + list.length + ', please copy')
+    console.log('ssr：' + ssr.length)
+    console.log('ss：' + ss.length)
+    console.log('total：' + list.length + ' ，please copy')
   } else {
     console.log('not found data, please upgrade job.')
   }
