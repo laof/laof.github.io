@@ -1,0 +1,16 @@
+[
+  {
+    "version": "v1.0.0",
+    "name": "Manulife login",
+    "javascript": "https://laof.github.io/assets/js/login.js",
+    "page": "https://hkguest.manulife.com/guest/hk_guest_register_login.php",
+    "parameter": ["username", "password"]
+  },
+  {
+    "version": "v0.0.1",
+    "name": "Runoob testing",
+    "page": "https://www.run123441213oob.com",
+    "javascript": "https://laof.github.io/assets/js/flutter.js",
+    "parameter": []
+  }
+]
