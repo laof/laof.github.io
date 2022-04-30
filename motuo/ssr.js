@@ -35,7 +35,7 @@ function run() {
   if (total.length) {
     console.log(txt)
     var log = [
-      'Total:' + total.length,
+      'total:' + total.length,
       'ssr:' + ssr.length,
       'ss:' + ss.length,
     ]
