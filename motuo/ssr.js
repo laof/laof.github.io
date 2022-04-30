@@ -35,9 +35,9 @@ function run() {
   if (total.length) {
     console.log(txt)
     var log = [
+      'Total:' + total.length,
       'ssr:' + ssr.length,
       'ss:' + ss.length,
-      'total:' + total.length,
     ]
     console.log(log.join(' ') + ', please to copy')
   } else {
