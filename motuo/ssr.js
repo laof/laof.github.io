@@ -28,16 +28,20 @@ function run() {
   var ssr = getList(document.body.innerHTML, 'ssr')
   var ss = getList(document.body.innerHTML, 'ss')
   var list = [].concat(ssr, ss)
+  var txt = list.map(function (data) {
+    return data.value
+  })
+  txt = txt.join('\n\n')
   if (list.length) {
-    console.log('ssr：' + ssr.length)
-    console.log('ss：' + ss.length)
-    console.log('total：' + list.length + ' ，please copy')
+    console.log(txt)
+    var log = [
+      'ssr: ' + ssr.length,
+      'ss: ' + ss.length,
+      'total: ' + total.length,
+    ]
+    console.log(log.join(' '))
   } else {
     console.log('not found data, please upgrade job.')
   }
-  return list
-    .map(function (data) {
-      return data.value
-    })
-    .join('\n\n')
+  return txt
 }
