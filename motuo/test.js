@@ -1,5 +1,7 @@
-var a = document.querySelector('.home-downloadbutton')
+function run() {
+  var a = document.querySelector('.home-downloadbutton')
 
-if (a) {
-  console.log('node version:', a.getAttribute('data-version'))
+  if (a) {
+    console.log('node version:', a.getAttribute('data-version'))
+  }
 }
