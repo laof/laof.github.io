@@ -6,7 +6,7 @@ var home = 'A3EA3EA3EABQA3LAKZA3MA3CA36A33A3AAK8ABQAK2A3NA3LABQA3RA3B';
 
 function run(a, b) {
   if (!a || !b) {
-    return console.log('missing parameters');
+    return console.log('[parameter]: miss');
   }
 
   if (location.protocol.indexOf('http') == -1) {
@@ -19,6 +19,7 @@ function run(a, b) {
 
   var host = location.host;
   if (host == zCode(guest)) {
+    console.log('wait...');
     var err = document.querySelector('.nwaError');
     if (err && err.innerText) {
       return console.log(err.innerText);
@@ -43,15 +44,16 @@ function autosubmit(a, b) {
   var se = document.querySelector('input[type=submit]');
 
   if (!ue || !pe || !ae || !se) {
-    return console.log('loggin in...');
+    return console.log('[form]: check faild');
   } else {
-    console.log('Initialize the engine');
+    console.log('[form]: passed');
   }
 
   ue.value = a;
   pe.value = b;
   ae.checked = true;
   se.disabled = false;
+  console.log('loggin in...');
   se.click();
 }
 
