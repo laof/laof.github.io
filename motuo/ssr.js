@@ -25,14 +25,17 @@ function getList(text, key) {
 }
 
 function run() {
-  var list = [].concat(
-    getList(document.body.innerHTML, 'ssr'),
-    getList(document.body.innerHTML, 'ss'),
-  )
-
+  var ssr = getList(document.body.innerHTML, 'ssr')
+  var ss = getList(document.body.innerHTML, 'ss')
+  var list = [].concat(ssr, ss)
+  if (list.length) {
+    console.log('SSR:' + ssr.length)
+    console.log('SS:' + ss.length)
+    console.log('total:' + list.length + ', please copy')
+  }
   return list
     .map(function (data) {
       return data.value
     })
-    .join('\n')
+    .join('\n\n')
 }
