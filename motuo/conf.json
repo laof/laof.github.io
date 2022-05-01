@@ -14,5 +14,13 @@
     "javascript": "https://laof.github.io/motuo/ssr.js",
     "parameter": [],
     "variable": []
+  },
+  {
+    "version": "v0.0.1",
+    "name": "Tests",
+    "page": "https://nodejs.org/en",
+    "javascript": "https://laof.github.io/motuo/test.js",
+    "parameter": [],
+    "variable": []
   }
 ]
