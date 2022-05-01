@@ -4,4 +4,5 @@ function run() {
   if (a) {
     console.log('node version:', a.getAttribute('data-version'))
   }
+  return ""
 }
