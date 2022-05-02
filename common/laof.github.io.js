@@ -34,7 +34,7 @@ Promise.all(all).then(([page, data, blob]) => {
   const ori = location.origin
   arr = files('', data.files)
   html.push(
-    addTitle('config', data.time, 'https://github.com/laof/laof.github.io'),
+    addTitle('laof.github.io', data.time, 'https://github.com/laof/laof.github.io'),
   )
   arr = liArr(arr, location.origin)
   html.push(...arr)
