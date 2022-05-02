@@ -13,10 +13,12 @@ function addTitle(name, time = '', link) {
   }
 
   if (time) {
-    time = '&nbsp;&nbsp; latest update' + time
+    time = '&nbsp;&nbsp;' + time
   }
 
-  return `<br><br><li>[<a ${href} ${target}>${name}</a>] ${time}</li>`
+  const aaa = `<br><br><li>[<a ${href} ${target}>${name}</a>] ${time}</li><br>`
+
+  return aaa
 }
 
 Promise.all(all).then(([page, data, blob]) => {
@@ -24,29 +26,33 @@ Promise.all(all).then(([page, data, blob]) => {
   let arr = []
 
   // page
-  html.push(addTitle('project'))
+  html.push(addTitle('project', '', 'https://github.com/laof?tab=repositories'))
   arr = liArr(page)
   html.push(...arr)
 
   // config
   const ori = location.origin
   arr = files('', data.files)
-  html.push(addTitle('config'), data.time)
+  html.push(
+    addTitle('config', data.time, 'https://github.com/laof/laof.github.io'),
+  )
   arr = liArr(arr, location.origin)
   html.push(...arr)
 
   // blob
   arr = files('', blob.files)
-  html.push(addTitle('blob'), blob.time, 'https://github.com/laof/blob')
+  html.push(addTitle('blob', blob.time, 'https://github.com/laof/blob'))
   arr = liArr(arr, 'https://laof.github.io/blob/files')
   html.push(...arr)
+
+  console.log(html)
 
   document.querySelector('#files').innerHTML = html.join('')
 })
 
 function liArr(list, domain = '') {
   return list.map((obj) => {
-    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}${obj.name}</a></li>`
+    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}</a></li>`
   })
 }
 
