@@ -4,10 +4,16 @@ const all = [
   fetch('blob/blob.json').then((res) => res.json()),
 ]
 
-function addTitle(name, time = '', link = 'javascript:;') {
+function addTitle(name, time = '', link) {
+  let target = ''
+  let href = ''
+  if (link) {
+    target = `target="_blank"`
+    href = `href="${link}"`
+  }
   return `
   <li></li>
-  <li>>----------<a href="${link}" target="_blank">${name}</a>${time}------------</li>
+  <li>----------<a ${href} ${target}>${name}</a>${time}------------</li>
   `
 }
 
