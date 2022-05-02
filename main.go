@@ -21,11 +21,18 @@ type ResData struct {
 }
 
 const infofile = "output/assets-info.json"
+const tempdir = "output"
 
 func main() {
 
-	os.Mkdir("output", 0755)
+	os.Mkdir(tempdir, 0755)
 
+	// save("motuo", "motuo.json")
+	save("mogai", "mogai.json")
+
+}
+
+func save(path, filename string) {
 	var list []FileInfo
 	file("assets", &list)
 

@@ -19,7 +19,6 @@ jobs:
         with:
           branch: main
           folder: output
-          target-folder: data
           clean: false
           force: false
           # clean-exclude: true
