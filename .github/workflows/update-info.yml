@@ -21,6 +21,6 @@ jobs:
           folder: assets
           target-folder: data
           # clean-exclude: true
-          clean: false
+          clean: true
           # force: false
           commit-message: update info.json by action
