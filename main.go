@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"time"
 )
 
@@ -19,14 +20,14 @@ type ResData struct {
 	Time  string     `json:"time"`
 }
 
-const infofile = "assets/info.json"
+const infofile = "output/info.json"
 
 func main() {
 
-	// os.Mkdir("data", 0755)
+	os.Mkdir("output", 0755)
 
 	var list []FileInfo
-	file("assets", &list)
+	file("output", &list)
 
 	var cstZone = time.FixedZone("CST", 8*3600)
 	newtime := time.Now().In(cstZone).Format("2006-01-02 15:04:05")

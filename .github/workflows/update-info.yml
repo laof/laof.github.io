@@ -18,7 +18,7 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: main
-          folder: assets
+          folder: output
           target-folder: data
           # clean-exclude: true
           clean: true
