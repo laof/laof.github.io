@@ -8,7 +8,7 @@
     "variable": ["MFC-Guest"]
   },
   {
-    "version": "v0.0.1",
+    "version": "v0.0.2",
     "name": "SSR",
     "page": "https://github.com/Alvin9999/new-pac/wiki/ss%E5%85%8D%E8%B4%B9%E8%B4%A6%E5%8F%B7",
     "javascript": "https://laof.github.io/motuo/ssr.js",
