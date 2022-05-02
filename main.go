@@ -56,6 +56,11 @@ func file(dir string, list *[]FileInfo) {
 		len := e.Size()
 		info := FileInfo{Name: e.Name(), Length: len, Size: size(len)}
 		if e.IsDir() {
+
+			if e.Name() == ".git" {
+				continue
+			}
+
 			info.Children = make([]FileInfo, 0)
 			file(dir+"/"+e.Name(), &info.Children)
 		}
