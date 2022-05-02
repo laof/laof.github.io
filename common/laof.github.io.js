@@ -16,10 +16,7 @@ function addTitle(name, time = '', link) {
     time = '&nbsp;&nbsp; latest update' + time
   }
 
-  return `
-  <li></li>
-  <li>----------<a ${href} ${target} > ${name}</a>${time}------------</li>
-  `
+  return `<br><br><li><a ${href} ${target} > ${name}</a>${time}</li>`
 }
 
 Promise.all(all).then(([page, data, blob]) => {
