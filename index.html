@@ -12,7 +12,7 @@
         .then((res) => res.json())
         .then((list) => {
           const html = list.map((obj) => {
-            return `<li><a href="${obj.link}" target="_blank">${obj.link} ${obj.size}</a></li>`
+            return `<li><a href="${obj.link}" target="_blank">${obj.name}</a></li>`
           })
 
           document.querySelector('#index').innerHTML = html.join('')
