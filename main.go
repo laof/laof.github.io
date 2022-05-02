@@ -20,7 +20,6 @@ type ResData struct {
 	Time  string     `json:"time"`
 }
 
-const infofile = "output/assets-info.json"
 const tempdir = "output"
 
 func main() {
@@ -32,9 +31,9 @@ func main() {
 
 }
 
-func save(path, filename string) {
+func save(dir, filename string) {
 	var list []FileInfo
-	file("assets", &list)
+	file(dir, &list)
 
 	var cstZone = time.FixedZone("CST", 8*3600)
 	newtime := time.Now().In(cstZone).Format("2006-01-02 15:04:05")
@@ -42,7 +41,7 @@ func save(path, filename string) {
 	var rdata = ResData{Time: newtime, Files: list}
 
 	data, _ := json.Marshal(rdata)
-	ioutil.WriteFile(infofile, data, 0644)
+	ioutil.WriteFile(tempdir+"/"+filename, data, 0644)
 	fmt.Print("golang: update info.json successfully")
 }
 
