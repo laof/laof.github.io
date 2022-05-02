@@ -16,7 +16,7 @@ function addTitle(name, time = '', link) {
     time = '&nbsp;&nbsp; latest update' + time
   }
 
-  return `<br><br><li><a ${href} ${target} > ${name}</a>${time}</li>`
+  return `<br><br><li>[<a ${href} ${target}>${name}</a>] ${time}</li>`
 }
 
 Promise.all(all).then(([page, data, blob]) => {
@@ -46,7 +46,7 @@ Promise.all(all).then(([page, data, blob]) => {
 
 function liArr(list, domain = '') {
   return list.map((obj) => {
-    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.name}</a></li>`
+    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}${obj.name}</a></li>`
   })
 }
 
