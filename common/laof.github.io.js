@@ -17,31 +17,30 @@ Promise.all(all).then(([page, data, blob]) => {
 
   // page
   html.push(addTitle('project'))
-  arr = page.map((obj) => {
-    return `<li><a href="${obj.link}" target="_blank">${obj.name}</a></li>`
-  })
+  arr = liArr(page)
   html.push(...arr)
 
   // config
   const ori = location.origin
   arr = files('', data.files)
   html.push(addTitle('config'), data.time)
-  arr = arr.map((obj) => {
-    return `<li><a href="${ori}${obj.link}" target="_blank">${obj.name}</a></li>`
-  })
+  arr = liArr(arr, location.origin)
   html.push(...arr)
 
   // blob
   arr = files('', blob.files)
-  const blink = "https://github.com/laof/blob/files"
   html.push(addTitle('blob'), blob.time, 'https://github.com/laof/blob')
-  arr = arr.map((obj) => {
-    return `<li><a href="${blink}${obj.link}" target="_blank">${obj.name}</a></li>`
-  })
+  arr = liArr(arr, 'https://laof.github.io/blob/files')
   html.push(...arr)
 
   document.querySelector('#files').innerHTML = html.join('')
 })
+
+function liArr(list, domain = '') {
+  return list.map((obj) => {
+    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.name}</a></li>`
+  })
+}
 
 function files(path, data = [], arr = []) {
   for (let index = 0; index < data.length; index++) {
