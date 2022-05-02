@@ -57,7 +57,7 @@ func file(dir string, list *[]FileInfo) {
 		info := FileInfo{Name: e.Name(), Length: len, Size: size(len)}
 		if e.IsDir() {
 
-			if e.Name() == ".git" {
+			if e.Name() == ".git" || e.Name() == ".github" {
 				continue
 			}
 
