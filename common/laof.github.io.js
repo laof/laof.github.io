@@ -26,7 +26,9 @@ Promise.all(all).then(([page, data, blob]) => {
   let arr = []
 
   // page
-  html.push(addTitle('repositories', '', 'https://github.com/laof?tab=repositories'))
+  html.push(
+    addTitle('repositories', '', 'https://github.com/laof?tab=repositories'),
+  )
   arr = liArr(page)
   html.push(...arr)
 
@@ -34,7 +36,11 @@ Promise.all(all).then(([page, data, blob]) => {
   const ori = location.origin
   arr = files('', data.files)
   html.push(
-    addTitle('laof.github.io', data.time, 'https://github.com/laof/laof.github.io'),
+    addTitle(
+      'laof.github.io',
+      data.time,
+      'https://github.com/laof/laof.github.io',
+    ),
   )
   arr = liArr(arr, location.origin)
   html.push(...arr)
@@ -50,7 +56,9 @@ Promise.all(all).then(([page, data, blob]) => {
 
 function liArr(list, domain = '') {
   return list.map((obj) => {
-    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}</a> ${obj.size}</li>`
+    return `<li><a href="${domain}${obj.link}" target="_blank">${
+      obj.link
+    }</a> ${obj.size || ''}</li>`
   })
 }
 
