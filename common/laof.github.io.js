@@ -50,7 +50,7 @@ Promise.all(all).then(([page, data, blob]) => {
 
 function liArr(list, domain = '') {
   return list.map((obj) => {
-    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}</a></li>`
+    return `<li><a href="${domain}${obj.link}" target="_blank">${obj.link}</a> ${obj.size}</li>`
   })
 }
 
