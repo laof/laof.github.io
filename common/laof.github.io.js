@@ -18,7 +18,7 @@ function addTitle(name, time = '', link) {
 
   return `
   <li></li>
-  <li>----------<a ${href} ${target}>${name}</a>${time}------------</li>
+  <li>----------<a ${href} ${target} > ${name}</a>${time}------------</li>
   `
 }
 
