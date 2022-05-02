@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"time"
 )
 
@@ -37,7 +38,10 @@ func save(dir, filename string) {
 	var rdata = ResData{Time: newtime, Files: list}
 
 	data, _ := json.Marshal(rdata)
-	ioutil.WriteFile(filename, data, 0644)
+
+	var output = "output"
+	os.Mkdir(output, 0755)
+	ioutil.WriteFile(output+"/"+filename, data, 0644)
 
 }
 
