@@ -26,7 +26,7 @@ Promise.all(all).then(([page, data, blob]) => {
   let arr = []
 
   // page
-  html.push(addTitle('project', '', 'https://github.com/laof?tab=repositories'))
+  html.push(addTitle('repositories', '', 'https://github.com/laof?tab=repositories'))
   arr = liArr(page)
   html.push(...arr)
 
