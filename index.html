@@ -1,4 +1,7 @@
+<p id="time"></p>
 <ul id="index"></ul>
+<br />
+<ul id="files"></ul>
 <script>
   fetch('page.json')
     .then((res) => res.json())
@@ -9,4 +12,47 @@
 
       document.querySelector('#index').innerHTML = html.join('')
     })
+
+  function files(path, data = [], arr = []) {
+    for (let index = 0; index < data.length; index++) {
+      const obj = data[index]
+      const oc = obj.children
+      if (!Array.isArray(oc)) {
+        obj.link = `${path}/${obj.name}`
+        arr.push(obj)
+      } else if (oc.length) {
+        files(`${path}/${obj.name}`, oc, arr)
+      }
+    }
+    return arr
+  }
+
+  fetch('data.json')
+    .then((res) => res.json())
+    .then((res) => {
+      if (!res) {
+        return
+      }
+      document.querySelector('#time').innerHTML = 'last update time ' + res.time
+      const list = files('https://laof.github.io', res.files)
+      const html = list.map((obj) => {
+        return `<li><a href="${obj.link}" target="_blank">${obj.link} ${obj.size}</a></li>`
+      })
+
+      document.querySelector('#files').innerHTML = html.join('')
+    })
+
+  function files(path, data = [], arr = []) {
+    for (let index = 0; index < data.length; index++) {
+      const obj = data[index]
+      const oc = obj.children
+      if (!Array.isArray(oc)) {
+        obj.link = `${path}/${obj.name}`
+        arr.push(obj)
+      } else if (oc.length) {
+        files(`${path}/${obj.name}`, oc, arr)
+      }
+    }
+    return arr
+  }
 </script>
