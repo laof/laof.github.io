@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"time"
 )
 
@@ -20,15 +19,12 @@ type ResData struct {
 	Time  string     `json:"time"`
 }
 
-const tempdir = "output"
-
 func main() {
+	fmt.Print("run...")
 
-	os.Mkdir(tempdir, 0755)
+	save(".", "data.json")
 
-	// save("motuo", "motuo.json")
-	save("mogai", "mogai.json")
-
+	fmt.Print("golang: update info.json successfully")
 }
 
 func save(dir, filename string) {
@@ -41,8 +37,8 @@ func save(dir, filename string) {
 	var rdata = ResData{Time: newtime, Files: list}
 
 	data, _ := json.Marshal(rdata)
-	ioutil.WriteFile(tempdir+"/"+filename, data, 0644)
-	fmt.Print("golang: update info.json successfully")
+	ioutil.WriteFile(filename, data, 0644)
+
 }
 
 func file(dir string, list *[]FileInfo) {

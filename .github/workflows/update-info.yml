@@ -22,4 +22,4 @@ jobs:
           clean: false
           force: false
           # clean-exclude: true
-          commit-message: update info.json by action
+          commit-message: update json file by action
