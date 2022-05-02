@@ -20,7 +20,7 @@ jobs:
           branch: main
           folder: assets
           target-folder: data
-          clean-exclude: true
+          # clean-exclude: true
           clean: false
-          force: false
+          # force: false
           commit-message: update info.json by action
