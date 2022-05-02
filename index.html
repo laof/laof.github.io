@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Welcome | laof.github.io</title>
-  </head>
-  <body>
-    <ul id="index"></ul>
-    <script>
-      fetch('page.json')
-        .then((res) => res.json())
-        .then((list) => {
-          const html = list.map((obj) => {
-            return `<li><a href="${obj.link}" target="_blank">${obj.name}</a></li>`
-          })
+<ul id="index"></ul>
+<script>
+  fetch('page.json')
+    .then((res) => res.json())
+    .then((list) => {
+      const html = list.map((obj) => {
+        return `<li><a href="${obj.link}" target="_blank">${obj.name}</a></li>`
+      })
 
-          document.querySelector('#index').innerHTML = html.join('')
-        })
-    </script>
-  </body>
-</html>
+      document.querySelector('#index').innerHTML = html.join('')
+    })
+</script>
