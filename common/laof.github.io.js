@@ -45,8 +45,6 @@ Promise.all(all).then(([page, data, blob]) => {
   arr = liArr(arr, 'https://laof.github.io/blob/files')
   html.push(...arr)
 
-  console.log(html)
-
   document.querySelector('#files').innerHTML = html.join('')
 })
 
