@@ -1,4 +1,4 @@
-const data = [
+const all = [
   fetch('page.json').then((res) => res.json()),
   fetch('data.json').then((res) => res.json()),
   fetch('blob/blob.json').then((res) => res.json()),
@@ -11,7 +11,7 @@ function addTitle(name, time = '', link = 'javascript:;') {
   `
 }
 
-Promise.all(data).then(([page, data, blob]) => {
+Promise.all(all).then(([page, data, blob]) => {
   const html = []
   let arr = []
 
