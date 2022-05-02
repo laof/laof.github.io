@@ -11,6 +11,11 @@ function addTitle(name, time = '', link) {
     target = `target="_blank"`
     href = `href="${link}"`
   }
+
+  if (time) {
+    time = '&nbsp;&nbsp; latest update' + time
+  }
+
   return `
   <li></li>
   <li>----------<a ${href} ${target}>${name}</a>${time}------------</li>
