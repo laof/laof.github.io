@@ -5,7 +5,7 @@
     "javascript": "https://laof.github.io/motuo/login.js",
     "page": "https://hkguest.manulife.com/guest/hk_guest_register_login.php",
     "parameter": ["username", "password"],
-    "variable": ["MFC-Guest"]
+    "variable": ["MFC-Guest123"]
   },
   {
     "version": "v0.0.2",
