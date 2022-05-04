@@ -60,8 +60,8 @@ Promise.all(all).then(([page, data, blob]) => {
 function liArr(list, domain = '') {
   return list.map((obj) => {
     return `<li><a href="${domain}${obj.link}" target="_blank">${
-      obj.name || obj.link
-    }</a> ${obj.size || ''}</li>`
+      obj.name
+    }</a> ${obj.size || ''} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${obj.link}</li>`
   })
 }
 
