@@ -25,12 +25,7 @@ Promise.all(all).then(([page, data, blob]) => {
   const html = []
   let arr = []
 
-  // page
-  html.push(
-    addTitle('repositories', '', 'https://github.com/laof?tab=repositories'),
-  )
-  arr = liArr(page)
-  html.push(...arr)
+
 
   // config
   const ori = location.origin
@@ -49,6 +44,13 @@ Promise.all(all).then(([page, data, blob]) => {
   arr = files('', blob.files)
   html.push(addTitle('blob', blob.time, 'https://github.com/laof/blob'))
   arr = liArr(arr, 'https://laof.github.io/blob/files')
+  html.push(...arr)
+  
+  // page
+  html.push(
+    addTitle('repositories', '', 'https://github.com/laof?tab=repositories'),
+  )
+  arr = liArr(page)
   html.push(...arr)
 
   document.querySelector('#files').innerHTML = html.join('')
