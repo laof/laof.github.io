@@ -1,7 +1,8 @@
+const t = '?t=' + new Date().getTime()
 const all = [
-  fetch('page.json').then((res) => res.json()),
-  fetch('data.json').then((res) => res.json()),
-  fetch('blob/blob.json').then((res) => res.json()),
+  fetch('page.json'+t).then((res) => res.json()),
+  fetch('data.json'+t).then((res) => res.json()),
+  fetch('blob/blob.json'+t).then((res) => res.json()),
 ]
 
 function addTitle(name, time = '', link) {
