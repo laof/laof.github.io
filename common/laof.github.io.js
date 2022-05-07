@@ -54,16 +54,20 @@ Promise.all(all).then(([page, data, blob]) => {
 
   const ul = document.createElement("ui");
   ul.innerHTML = html.join("");
-  document.body.appendChild = ul;
+  document.body.appendChild(ul);
 });
 
 function liArr(list, domain = "") {
   return list.map((obj) => {
+    let dir = obj.link;
+    if (dir.indexOf("/") == 0) {
+      dir = dir.replace("/", "");
+    }
     return `<li><a href="${domain}${obj.link}" target="_blank">${
       obj.name
-    }</a><span style="color: #d8d8d8;font-size: 12px;"> ${obj.size || ""} ${
-      obj.link
-    }</span></li>`;
+    }</a><span style="color: #a6a3a3;font-size: 12px;"> ${
+      obj.size || ""
+    } ${dir}</span></li>`;
   });
 }
 
