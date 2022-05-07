@@ -24,8 +24,9 @@ func main() {
 	fmt.Print("run...")
 
 	save(".", "data.json")
+	save("mogai", "mogai.json")
 
-	fmt.Print("golang: update info.json successfully")
+	fmt.Print("golang: update json file successfully")
 }
 
 func save(dir, filename string) {
