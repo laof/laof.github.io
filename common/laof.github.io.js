@@ -17,7 +17,8 @@ function addTitle(name, time = "", link) {
     time = `<span style="font-size:12px">${time}</span>`;
   }
 
-  const aaa = `<br><br><li>[<a ${href} ${target}>${name}</a>] ${time}</li><br>`;
+  const style = `style="color:#3dbe04;font-family: fantasy;"`;
+  const aaa = `<br><br><li><a ${style} ${href} ${target}>${name}</a> ${time}</li><br>`;
 
   return aaa;
 }
@@ -47,7 +48,7 @@ Promise.all(all).then(([page, data, blob]) => {
 
   // page
   html.push(
-    addTitle("my repositories", "", "https://github.com/laof?tab=repositories")
+    addTitle("repositories", "", "https://github.com/laof?tab=repositories")
   );
   arr = liArr(page);
   html.push(...arr);
