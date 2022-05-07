@@ -1,1 +1,1 @@
-alert("testjs")
+alert("alert.js")
