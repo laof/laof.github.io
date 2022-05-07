@@ -52,6 +52,7 @@ Promise.all(all).then(([page, data, blob]) => {
   );
   arr = liArr(page);
   html.push(...arr);
+  html.push("<br><br>");
 
   const ul = document.createElement("ui");
   ul.innerHTML = html.join("");
