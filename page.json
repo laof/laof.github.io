@@ -1,22 +1,22 @@
 [
   {
-    "name": "motuo for android",
+    "name": "motuo",
     "download": "",
     "link": "https://github.com/laof/motuo"
   },
   {
-    "name": "mogai for chrome extension",
+    "name": "mogai",
     "download": "",
     "link": "https://github.com/laof/mogai"
   },
   {
-    "name": "shared file server on your computer",
+    "name": "filesserver",
     "download": "",
     "link": "https://github.com/laof/filesserver"
   },
   {
-    "name": "big picture thinker for windows",
+    "name": "modao",
     "download": "",
-    "link": "https://github.com/laof/glider"
+    "link": "https://github.com/laof/modao"
   }
 ]
