@@ -77,7 +77,7 @@ Promise.all(all).then(([page, data, blob]) => {
 
 function liArr(list, domain = '') {
   return list.map((obj) => {
-    let dir = String(obj.link).replace(/^\/|test$/ig,'')
+    let dir = String(obj.link).replace(new RegExp(`^\/|${obj.name}$`,'gi'),'')
 
     return `<li><a style="color: #a16138;user-select: none;display: inline-block;width:${maxName}px;" href="${domain}${
       obj.link
