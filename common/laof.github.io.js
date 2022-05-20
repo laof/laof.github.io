@@ -9,7 +9,6 @@ const all = [
 ]
 
 function maxLength(list, attr) {
-  console.log(list)
   const max = [].concat(...list).sort((a, b) => {
     if (a[attr] && b[attr]) {
       return b[attr].length - a[attr].length
