@@ -21,7 +21,7 @@ type ResData struct {
 }
 
 var fMap = map[string]bool{}
-var exc = []string{".gitignore", ".github", "cmd", "output"}
+var exc = []string{".gitignore", ".github", "go.mod", "go.sum", "main.go", "cmd", "output"}
 
 func init() {
 	for _, ele := range exc {
