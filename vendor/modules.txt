@@ -1,5 +1,0 @@
-# github.com/bep/golibsass v1.1.0
-## explicit; go 1.13
-github.com/bep/golibsass/internal/libsass
-github.com/bep/golibsass/libsass
-github.com/bep/golibsass/libsass/libsasserrors
