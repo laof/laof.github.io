@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>laof</title>
+    <style>li{list-style:none;padding:4px 0px}body{font:100% Helvetica,sans-serif;color:#333}.time{font-size:12px;color:#a6a3a3;user-select:none}.header{color:#3dbe04;font-family:fantasy;user-select:none}.name{color:#ffb484;user-select:none;display:inline-block}.size{display:inline-block;user-select:none;color:#a6a3a3;font-size:12px}.dir{color:#a6a3a3;user-select:none;font-size:12px}
+</style>
+  </head>
+  <body>
+    <script>const domain="https://laof.github.io/",t="?t="+new Date().getTime();let maxName=0,maxSize=0;const all=[fetch(domain+"page.json"+t).then(i=>i.json()),fetch(domain+"data.json"+t).then(i=>i.json()),fetch(domain+"blob/blob.json"+t).then(i=>i.json())];function maxLength(i,l){return([].concat(...i).sort((e,n)=>e[l]&&n[l]?n[l].length-e[l].length:-1).shift().name.length+5)*7}function addTitle(i,l="",s){let e="",n="";return s&&(e='target="_blank"',n=`href="${s}"`),l&&(l=`<span class="time">${l}</span>`),`<br><br><li><a class="header" ${n} ${e}>${i}</a> ${l}</li><br>`}Promise.all(all).then(([i,l,s])=>{let e=files("",l.files);maxName=maxLength([...i,...e,...s.files],"name"),maxSize=maxLength([...i,...e,...s.files],"size");const n=[];document.body.style.background="black";const o=location.origin;n.push(addTitle("laof.github.io",l.time,"https://github.com/laof/laof.github.io")),e=liArr(e,location.origin),n.push(...e),e=files("",s.files),n.push(addTitle("blob",s.time,"https://github.com/laof/blob")),e=liArr(e,"https://laof.github.io/blob/files"),n.push(...e),n.push(addTitle("repositories","","https://github.com/laof?tab=repositories")),e=liArr(i),n.push(...e),n.push("<br><br>");const a=document.createElement("ui");a.innerHTML=n.join(""),document.body.appendChild(a)});function liArr(i,l=""){return i.map(s=>{let e=String(s.link).replace(new RegExp(`^/|${s.name}$`,"gi"),"");return`<li><a class="name" style="width:${maxName}px;" href="${l}${s.link}" target="_blank">${s.name}</a><span class="size" style="width:${maxSize}px;"> ${s.size||""}</span><span class="dir">${e}</span></li>`})}function files(i,l=[],s=[]){for(let e=0;e<l.length;e++){const n=l[e],o=n.children;Array.isArray(o)?o.length&&files(`${i}/${n.name}`,o,s):(n.link=`${i}/${n.name}`,s.push(n))}return s}
+</script>
+  </body>
+</html>
