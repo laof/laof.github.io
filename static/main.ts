@@ -42,8 +42,6 @@ Promise.all(all).then(([page, data, blob]) => {
   maxName = maxLength([...page, ...arr, ...blob.files], "name");
   maxSize = maxLength([...page, ...arr, ...blob.files], "size");
   const html = [];
-  document.body.style.background = "black";
-
   // config
   const ori = location.origin;
   html.push(
