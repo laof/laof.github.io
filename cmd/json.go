@@ -40,8 +40,6 @@ func init() {
 }
 
 func Json() {
-	fmt.Println("run...")
-
 	save(".", "data.json")
 	save("mogai", "mogai.json")
 
@@ -72,7 +70,6 @@ func file(dir string, list *[]FileInfo) {
 	}
 
 	fs, err := ioutil.ReadDir(dir)
-	fmt.Println("====" + dir)
 
 	if err != nil {
 		return
