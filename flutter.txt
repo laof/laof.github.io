@@ -1,0 +1,35 @@
+在用户变量，选择新建环境变量，添加如下的两个环境变量和值：
+
+变量名                         值
+FLUTTER_STORAGE_BASE_URL       https://storage.flutter-io.cn
+PUB_HOSTED_URL                https://pub.flutter-io.cn
+
+
+flutter doctor
+flutter upgrade
+
+
+Android Repository 無法连接
+1. 进⼊ C:\windows\system32\drivers\etc\
+2. 打开 hosts ⽂件
+3. 添加 203.208.41.32 dl.google.com 即可解决
+
+
+如： Android Studio Could not GET gradle-3.2.0.pom
+这⼀类问题是由于 無法连接到 Maven 库造成的，解决⽅法如下：
+1. 进⼊ 当前所在項目名/android
+2. 打开 build.gradle (allprojects)
+3. 找到下面部分，并加上 maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+}
+
+
+注意：存在这样的⼀种情况，当你根据上述步骤设置了之后，依旧⽆法解决这个问题，并有类似于 Could
+not HEAD maven.aliyun.com 的报错信息，请检查 C:\Users\{user_name}\.gradle\gradle.properties 是否有设
+置代理。删除后问题即可解决。
