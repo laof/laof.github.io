@@ -20,6 +20,15 @@ type ResData struct {
 	Time  string     `json:"time"`
 }
 
+var fMap = map[string]bool{}
+var exc = []string{".gitignore", ".github", "cmd", "output"}
+
+func init() {
+	for _, ele := range exc {
+		fMap[ele] = true
+	}
+}
+
 func Json() {
 	fmt.Println("run...")
 
@@ -54,16 +63,17 @@ func file(dir string, list *[]FileInfo) {
 	}
 
 	for _, e := range fs {
+
+		name := e.Name()
+
+		if fMap[name] {
+			continue
+		}
 		len := e.Size()
-		info := FileInfo{Name: e.Name(), Length: len, Size: size(len)}
+		info := FileInfo{Name: name, Length: len, Size: size(len)}
 		if e.IsDir() {
-
-			if e.Name() == ".git" || e.Name() == ".github" {
-				continue
-			}
-
 			info.Children = make([]FileInfo, 0)
-			file(dir+"/"+e.Name(), &info.Children)
+			file(dir+"/"+name, &info.Children)
 		}
 		*list = append(*list, info)
 	}
