@@ -21,11 +21,21 @@ type ResData struct {
 }
 
 var fMap = map[string]bool{}
-var exc = []string{".gitignore", ".github", "go.mod", "go.sum", "main.go", "cmd", "output"}
+var exc = []string{
+	"index.html",
+	".gitignore",
+	".git",
+	".github",
+	"go.mod",
+	"go.sum",
+	"main.go",
+	"cmd",
+	"output"}
 
 func init() {
 	for _, ele := range exc {
 		fMap[ele] = true
+		fMap["./"+ele] = true
 	}
 }
 
@@ -56,7 +66,13 @@ func save(dir, filename string) {
 }
 
 func file(dir string, list *[]FileInfo) {
+
+	if fMap[dir] {
+		return
+	}
+
 	fs, err := ioutil.ReadDir(dir)
+	fmt.Println("====" + dir)
 
 	if err != nil {
 		return
@@ -66,9 +82,10 @@ func file(dir string, list *[]FileInfo) {
 
 		name := e.Name()
 
-		if fMap[name] {
+		if dir == "." && fMap[name] {
 			continue
 		}
+
 		len := e.Size()
 		info := FileInfo{Name: name, Length: len, Size: size(len)}
 		if e.IsDir() {
