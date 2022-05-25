@@ -19,13 +19,13 @@ Android Repository 無法连接
 这⼀类问题是由于 無法连接到 Maven 库造成的，解决⽅法如下：
 1. 进⼊ 当前所在項目名/android
 2. 打开 build.gradle (allprojects)
-3. 找到下面部分，并加上 maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+3. 找到下面部分，并加上 maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     }
 }
 
