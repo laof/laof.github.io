@@ -50,8 +50,13 @@ func save(dir, filename string) {
 	var list []FileInfo
 	file(dir, &list)
 
-	var cstZone = time.FixedZone("CST", 8*3600)
-	newtime := time.Now().In(cstZone).Format("2006-01-02 15:04:05")
+	shanghai, loca := time.LoadLocation("Asia/Shanghai")
+
+	if loca != nil {
+		return
+	}
+
+	newtime := time.Now().In(shanghai).Format("2006-01-02 15:04:05")
 
 	var rdata = ResData{Time: newtime, Files: list}
 
