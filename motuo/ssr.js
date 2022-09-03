@@ -24,7 +24,7 @@ function getList(text, key) {
   return values
 }
 
-function run1() {
+function run() {
   var ssr = getList(document.body.innerHTML, 'ssr')
   var ss = getList(document.body.innerHTML, 'ss')
   var total = [].concat(ssr, ss)
@@ -50,7 +50,7 @@ function run1() {
 
 var noData = 'not found data, please upgrade job.'
 
-function run() {
+function run_vercel() {
 
   var pre = document.querySelector('pre')
 
