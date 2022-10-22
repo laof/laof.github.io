@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>download file</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <textarea id="data" rows="10" style="width: 100%"></textarea>
+    <br />
+    <button id="ok">ok</button>
+    <textarea id="json" rows="10" style="width: 100%"></textarea>
+    <script>
+      document.getElementById("ok").addEventListener("click", (e) => {
+        const link = document.getElementById("data").value;
+
+        if (!link) {
+          return;
+        }
+
+        document.getElementById("json").value = "loading...";
+
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify({ downloader: link }),
+        };
+
+        const geturl =
+          "https://jazzy-alfajores-2f455d.netlify.app/.netlify/functions/take-screenshot";
+        fetch(geturl, options)
+          .then((res) => res.json())
+          .then((res) => {
+            document.getElementById("json").value = JSON.stringify(res);
+          });
+      });
+    </script>
+  </body>
+</html>
