@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>download file</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <textarea id="data" rows="10" style="width: 100%"></textarea>
-    <br />
-    <button id="ok">ok</button>
-    <textarea id="json" rows="10" style="width: 100%"></textarea>
-    <script>
-      document.getElementById("ok").addEventListener("click", (e) => {
-        const link = document.getElementById("data").value;
 
-        if (!link) {
-          return;
-        }
+<head>
+  <meta charset="utf-8" />
+  <title>loading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+download...
 
-        document.getElementById("json").value = "loading...";
+<body>
+  <div>...</div>
+  <script>
 
-        const options = {
-          method: "POST",
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: JSON.stringify({ downloader: link }),
-        };
+    var f = '#'
 
-        const geturl =
-          "https://jazzy-alfajores-2f455d.netlify.app/.netlify/functions/take-screenshot";
-        fetch(geturl, options)
-          .then((res) => res.json())
-          .then((res) => {
-            document.getElementById("json").value = JSON.stringify(res);
-          });
-      });
-    </script>
-  </body>
+    if (location.hash.startsWith(f)) {
+
+      try {
+        var url = new URL(location.hash.replace(f, ''))
+        download(url)
+      } catch (e) {
+
+      }
+
+    }
+
+
+
+    function download(url) {
+      const postData = {
+        eby5a: window.btoa(url),
+      };
+
+      var form = document.createElement("form");
+      form.action = "https://jazzy-alfajores-2f455d.netlify.app//.netlify/functions/p2";
+      form.method = "post";
+      form.style.display = "none";
+
+      for (const key in postData) {
+        var input = document.createElement("textarea");
+        input.name = key;
+        input.value = postData[key];
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+      return form;
+    };
+
+  </script>
+</body>
+
 </html>
