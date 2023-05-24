@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      input,
+      button {
+        padding: 8px 25px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>color name</title>
+  </head>
+
+  <div style="text-align: center; margin: 130px auto">
+    <input type="text" id="color" onkeyup="search(event)" />
+    <button onclick="run()">ok</button>
+    <div id="closest" style="margin: 30px auto"></div>
+    <div id="display" style="width: 120px; height: 20px; display: inline-block"></div>
+  </div>
+  <body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/color-2-name/dist/color-2-name.js"></script> -->
+    <script src="common/color-2-name.js"></script>
+    <script>
+      function search(evt) {
+        if ([evt.code, evt.key].includes('Enter')) {
+          run();
+        }
+      }
+
+      function run() {
+        let color = document.querySelector('#color').value;
+        const display = document.querySelector('#display');
+        const closest = document.querySelector('#closest');
+
+        if (!color.startsWith('#')) {
+          color = '#' + color;
+        }
+
+        try {
+          const data = color2name.closest(color);
+          closest.innerHTML = JSON.stringify(data);
+          display.style.background = data.color;
+        } catch (e) {
+          closest.innerHTML = 'please input color value';
+        }
+      }
+    </script>
+  </body>
+</html>
