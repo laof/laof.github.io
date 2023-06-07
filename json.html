@@ -17,11 +17,11 @@
     </style>
   </head>
   <body>
-    <textarea id="old" rows="20"></textarea>
+    <textarea id="txt" rows="20"></textarea>
     <button onclick="start()">String to JSON</button>
     <textarea
       style="background: #f8f8f8"
-      id="new"
+      id="json"
       readonly
       rows="20"
     ></textarea>
@@ -41,20 +41,20 @@
           }, {})
       }
 
-      const old = document.querySelector('#old')
-      const res = document.querySelector('#new')
+      const input = document.querySelector('#txt')
+      const res = document.querySelector('#json')
 
       function start() {
-        let str = old.value
+        let str = input.value
         str = str.trim()
-        str = str.replaceAll('\\"', `'`)
-        res.value = 'runing...'
+        str = str.replaceAll('\\"', `"`)
+        res.value = 'formatting...'
 
         try {
           if (str.charAt() === `"`) {
             str = str.substring(1, str.length - 1)
           }
-          const obj = eval(`(function (params) { return params})(${str})`)
+          const obj = JSON.parse(str)
           str = JSON.stringify(sortObjectKeys(obj))
         } catch (e) {
           str = e
