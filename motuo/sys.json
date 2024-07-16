@@ -3,7 +3,7 @@
     "version": "v1.0.0",
     "name": "Manulife login",
     "javascript": "https://laof.github.io/motuo/login.js",
-    "page": "https://hkguest.manulife.com/guest/hk_guest_register_login.php",
+    "page": "https://asiaguest.manulife.com/guest/hk_guest_register_login.php",
     "parameter": ["username", "password"],
     "variable": ["MFC-Guest"]
   },
