@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>本地音乐播放器</title>
+    <style>
+        /* 基础样式 */
+        .player-container { max-width: 800px; margin: 20px auto; }
+        #playlist { list-style: none; padding: 0; }
+        #playlist li { padding: 8px; cursor: pointer; }
+        #playlist li.playing { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <button id="selectDir">选择音乐目录</button>
+        <ul id="playlist"></ul>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script>
+        // 现代浏览器文件访问API
+        const pickerOpts = {
+            types: [{
+                description: 'Music Files',
+                accept: { 'audio/mpeg': ['.mp3'] }
+            }],
+            excludeAcceptAllOption: true,
+            multiple: true
+        };
+
+        let currentTrackIndex = 0;
+        let tracks = [];
+
+        // 元素引用
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playlistElement = document.getElementById('playlist');
+        const selectDirBtn = document.getElementById('selectDir');
+
+        // 处理目录选择
+        async function handleDirSelect() {
+            try {
+                const handle = await window.showDirectoryPicker();
+                tracks = await processDirectory(handle);
+                updatePlaylist();
+                if (tracks.length > 0) playTrack(0);
+            } catch (err) {
+                console.log('用户取消选择或发生错误:', err);
+            }
+        }
+
+        // 递归处理目录
+        async function processDirectory(dirHandle) {
+            const files = [];
+            for await (const entry of dirHandle.values()) {
+                if (entry.kind === 'file' && entry.name.endsWith('.mp3')) {
+                    const file = await entry.getFile();
+                    files.push({
+                        name: entry.name,
+                        url: URL.createObjectURL(file),
+                        fileHandle: entry
+                    });
+                } else if (entry.kind === 'directory') {
+                    const subFiles = await processDirectory(entry);
+                    files.push(...subFiles);
+                }
+            }
+            return files;
+        }
+
+        // 更新播放列表
+        function updatePlaylist() {
+            playlistElement.innerHTML = '';
+            tracks.forEach((track, index) => {
+                const li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => playTrack(index);
+                playlistElement.appendChild(li);
+            });
+        }
+
+        // 播放指定曲目
+        function playTrack(index) {
+            currentTrackIndex = index;
+            audioPlayer.src = tracks[index].url;
+            audioPlayer.play();
+            
+            // 更新播放状态样式
+            Array.from(playlistElement.children).forEach(li => 
+                li.classList.remove('playing'));
+            playlistElement.children[index].classList.add('playing');
+        }
+
+        // 事件监听
+        selectDirBtn.addEventListener('click', handleDirSelect);
+        
+        // 自动播放下一曲
+        audioPlayer.addEventListener('ended', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            playTrack(currentTrackIndex);
+        });
+
+        // 键盘控制
+        document.addEventListener('keydown', (e) => {
+            switch(e.code) {
+                case 'Space':
+                    audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
+                    break;
+                case 'ArrowRight':
+                    playTrack((currentTrackIndex + 1) % tracks.length);
+                    break;
+                case 'ArrowLeft':
+                    playTrack((currentTrackIndex - 1 + tracks.length) % tracks.length);
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
