@@ -11,6 +11,24 @@
   <body>
      <button onClick="myPrint()">打印 </button>
      <button onClick="myprint2()">移动端方案打印 </button>
+      <div style="display: none;">
+      <div id="to-print">
+        <table border="1" width="100%">
+          <tr>
+            <th>
+              <div id="testse">fdsafa</div>
+            </th>
+            <th>fdsafa</th>
+            <th>fdsafa</th>
+          </tr>
+          <tr>
+            <td>33 </td>
+            <td>33 </td>
+            <td>33 </td>
+          </tr>
+        </table>
+      </div>
+    </div>
      <script>
     function myPrint() {
         const printWindow = window.open('', '_blank');
@@ -30,13 +48,7 @@
     }
 
    function myprint2() {
-      const aaa = window.open('', '_blank', '');
-      aaa.document.write(`<h1>My Printer<\/h1><script>
-      window.addEventListener('afterprint', function () {
-         alert(4343);
-        });
-        window.print();
-      <\/script>`);};
+      aaa(document.getElementById('to-print'))
     </script>
     <script>const domain="https://laof.github.io/",t="?t="+new Date().getTime();let maxName=0,maxSize=0;const all=[fetch(domain+"page.json"+t).then(i=>i.json()),fetch(domain+"data.json"+t).then(i=>i.json()),fetch(domain+"blob/blob.json"+t).then(i=>i.json())];function maxLength(i,l){return([].concat(...i).sort((e,n)=>e[l]&&n[l]?n[l].length-e[l].length:-1).shift().name.length+5)*7}function addTitle(i,l="",s){let e="",n="";return s&&(e='target="_blank"',n=`href="${s}"`),l&&(l=`<span class="time">${l}</span>`),`<br><br><li><a class="header" ${n} ${e}>${i}</a> ${l}</li><br>`}Promise.all(all).then(([i,l,s])=>{let e=files("",l.files);maxName=maxLength([...i,...e,...s.files],"name"),maxSize=maxLength([...i,...e,...s.files],"size");const n=[],o=location.origin;n.push(addTitle("laof.github.io",l.time,"https://github.com/laof/laof.github.io")),e=liArr(e,location.origin),n.push(...e),e=files("",s.files),n.push(addTitle("blob",s.time,"https://github.com/laof/blob")),e=liArr(e,"https://laof.github.io/blob/files"),n.push(...e),n.push(addTitle("repositories","","https://github.com/laof?tab=repositories")),e=liArr(i),n.push(...e),n.push("<br><br>");const a=document.createElement("ui");a.innerHTML=n.join(""),document.body.appendChild(a)});function liArr(i,l=""){return i.map(s=>{let e=String(s.link).replace(new RegExp(`^/|${s.name}$`,"gi"),"");return`<li><a class="name" style="width:${maxName}px;" href="${l}${s.link}" target="_blank">${s.name}</a><span class="size" style="width:${maxSize}px;"> ${s.size||""}</span><span class="dir">${e}</span></li>`})}function files(i,l=[],s=[]){for(let e=0;e<l.length;e++){const n=l[e],o=n.children;Array.isArray(o)?o.length&&files(`${i}/${n.name}`,o,s):(n.link=`${i}/${n.name}`,s.push(n))}return s}
 </script>
