@@ -9,8 +9,10 @@
 </style>
   </head>
   <body>
+    <iframe srcdoc="<html><body><h1 style='color: red;font-size:50px;'>iframe</h1></body></html>" frameborder="0">
      <button onClick="myPrint()">打印 </button>
      <button onClick="myprint2()">移动端方案打印 </button>
+       <button onClick="printtest()">print iframe </button>
       <div style="display: none;">
       <div id="to-print">
         <table border="1" width="100%">
@@ -31,6 +33,10 @@
     </div>
       <script src="./print.js"></script>
      <script>
+          function printtest() {
+            const iframe = document.querySelector('iframe');
+            iframe.contentWindow.print();
+        }
     function myPrint() {
         const printWindow = window.open('', '_blank');
         printWindow.document.write(`
