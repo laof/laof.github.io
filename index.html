@@ -16,6 +16,7 @@
      <button onClick="myPrint()">打印 </button>
      <button onClick="myprint2()">移动端方案打印 </button>
      <button onClick="openapp()">openapp</button>
+     <button onClick="refreshclear()">refreshclear</button>
      <div id="mygetid"></div>
      <button onClick="printtest()">print iframe </button>
       <div style="display: none;">
@@ -54,8 +55,16 @@
          window.open('https://lttesting.manutouch.com.hk/openapp/uat4/home/auth-app/sales-tools?id='+testcode)
        }
 
+       function setid(code){
+         sessionStorage.setItem('mygetid',code);
+       }
+
        function showid(){
           document.querySelector('#mygetid').innerHTML = 'code: '+ testcode;
+       }
+
+       function refreshclear(){
+         sessionStorage.clear();
        }
 
       const _url = new URL(location.href);
@@ -66,7 +75,14 @@
           openapp();
        }
 
-       window.testcode = window.testcode || getId();
+       window.testcode = sessionStorage.getItem('mygetid');
+
+       if(!window.testcode){
+          const aaa = getId();
+           setid(aaa);
+           window.testcode = aaa;
+       }
+       
 
         showid();
 
