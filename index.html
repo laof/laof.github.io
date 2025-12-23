@@ -15,8 +15,9 @@
     </div>
      <button onClick="myPrint()">打印 </button>
      <button onClick="myprint2()">移动端方案打印 </button>
-    <a href="https://lttesting.manutouch.com.hk/openapp/uat4/home/auth-app/sales-tools">https://lttesting.manutouch.com.hk/openapp/uat4/home/auth-app/sales-tools</a>
-       <button onClick="printtest()">print iframe </button>
+     <button onClick="openapp()">openapp</button>
+     <div id="mygetid"></div>
+     <button onClick="printtest()">print iframe </button>
       <div style="display: none;">
       <div id="to-print">
         <table border="1" width="100%">
@@ -37,10 +38,42 @@
     </div>
       <script src="./print.js"></script>
      <script>
-       setTimeout(()=>{
-         window.open('https://lttesting.manutouch.com.hk/openapp/uat4/home/auth-app/sales-tools')
-       },1000)
-          function printtest() {
+       function getId(){
+          const now = new Date();
+          const year   = now.getFullYear();
+          const month  = String(now.getMonth() + 1).padStart(2, '0');
+          const day    = String(now.getDate()).padStart(2, '0');
+          const hour   = String(now.getHours()).padStart(2, '0');
+          const minute = String(now.getMinutes()).padStart(2, '0');
+          const second = String(now.getSeconds()).padStart(2, '0');
+          const localStr = `${year}_${month}_${day}__${hour}_${minute}_${second}`;
+          return localStr
+       }
+       
+       function openapp(){
+         window.open('https://lttesting.manutouch.com.hk/openapp/uat4/home/auth-app/sales-tools?id='+window.testcode)
+       }
+
+       function showid(){
+          document.querySelector('#mygetid').innerHTML = 'code: '+ code;
+       }
+
+      const _url = new URL(location.href);
+      const ios = _url.searchParams.get('ios'); 
+      const code = _url.searchParams.get('code'); 
+
+       if(ios){
+          openapp();
+       }
+
+       window.testcode = window.testcode || getId();
+
+        showid();
+
+
+
+       
+       function printtest() {
             const iframe = document.querySelector('iframe');
             iframe.contentWindow.print();
         }
