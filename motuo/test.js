@@ -13,4 +13,4 @@ var txt = 'name:'+my_obj.username+' password:'+ my_obj.password;
 
 document.body.innerHTML = 'body '+txt;
 
-alert(txt);
+// alert(txt);
