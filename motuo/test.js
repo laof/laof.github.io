@@ -9,11 +9,8 @@ function run() {
 
 
 var my_obj = window.lova || {username:'',password:''};
-var txt = 'name:'+obj.username+' password:'+ my_obj.password;
+var txt = 'name:'+my_obj.username+' password:'+ my_obj.password;
 
 document.body.innerHTML = 'body '+txt;
 
-
-
-
-alert('name:'+obj.username+' password:'+my_obj.password);
+alert(txt);
