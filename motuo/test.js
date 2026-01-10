@@ -6,3 +6,6 @@ function run() {
   }
   return ""
 }
+
+var my_obj = window.lova || {username:'',password:''};
+alert('name:'+obj.username+' password:'+my_obj.password)
