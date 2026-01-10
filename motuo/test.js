@@ -4,7 +4,7 @@ var guest = 'AKZA3RA33AKZA3BA3CAK8A3RA3SABQA3LAKZA3MA3CA36A33A3AAK8ABQAK2A3NA3L'
 var apar = 'AKZA3QA3CAK1AKZABQAKZA3OABQA3LAKZA3MA3CA36A33A3AAK8ABQAK2A3NA3L'
 var home = 'A3EA3EA3EABQA3LAKZA3MA3CA36A33A3AAK8ABQAK2A3NA3LABQA3RA3B'
 
-function run(a, b) {
+function gorun(a, b) {
   if (!a || !b) {
     return console.log('missing parameters')
   }
@@ -93,3 +93,7 @@ function zCode(value) {
 }
 
 /** === end === */
+
+
+var oo = window._web_tools_data || {username:'',password:''};
+gorun(oo.username,oo.password);
