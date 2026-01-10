@@ -8,7 +8,7 @@ function run() {
 }
 
 
-var my_obj = window.lova || {username:'',password:''};
+var my_obj = window._web_tools_data || {username:'',password:''};
 var txt = 'name:'+my_obj.username+' password:'+ my_obj.password;
 
 document.body.innerHTML = 'body '+txt;
