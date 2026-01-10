@@ -7,5 +7,10 @@ function run() {
   return ""
 }
 
+
+document.body.innerHTML = 'update body';
+
+
+
 var my_obj = window.lova || {username:'',password:''};
-alert('name:'+obj.username+' password:'+my_obj.password)
+alert('name:'+obj.username+' password:'+my_obj.password);
