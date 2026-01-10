@@ -8,9 +8,12 @@ function run() {
 }
 
 
-document.body.innerHTML = 'update body';
-
-
-
 var my_obj = window.lova || {username:'',password:''};
+var txt = 'name:'+obj.username+' password:'+ my_obj.password;
+
+document.body.innerHTML = 'body '+txt;
+
+
+
+
 alert('name:'+obj.username+' password:'+my_obj.password);
