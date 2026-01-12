@@ -94,9 +94,8 @@ function zCode(value) {
 
 /** === end === */
 
-setTimeout(function _4343name() {
+setTimeout(function () {
    var oo = window._web_tools_data || {username:'',password:''};
    var ccc = gorun(oo.username,oo.password);
-   alert(ccc);
-},0)
+},200)
 
