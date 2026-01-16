@@ -10,6 +10,8 @@
 <body>
     <h1> sso validate page</h1>
     <div id="showlog"></div>
+    <pre id="debug"></pre>
+    <div id="windowname"></div>
     <div id="token"></div>
     <script>
         const search = window.location.search;
@@ -22,21 +24,45 @@
             document.getElementById('showlog').innerText = message;
         }
 
+        function debug(extra = {}) {
+            const nav = performance.getEntriesByType?.('navigation')?.[0];
+            const snapshot = {
+                href: location.href,
+                origin: location.origin,
+                referrer: document.referrer,
+                navigationType: nav?.type,
+                sessionPath: sessionStorage.getItem(my_path),
+                sessionLength: sessionStorage.length,
+                ...extra,
+            };
+
+            document.getElementById('debug').innerText = JSON.stringify(snapshot, null, 2);
+        }
+
+        debug({ stage: 'init' });
+
         if (params.get('path')) {
             show('1, set path: ' + params.get('path'))
+            window.name = params.get('path');
+            document.getElementById('windowname').innerText = '1 Window.name: ' + window.name;
             timeout().then(() => {
                 sessionStorage.setItem(my_path, params.get('path'));
+                debug({ stage: 'after-set-path' });
                 const logout = 'https://daolang.netlify.app/ssologout'
                 location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
             });
         } else if (params.get('deeplink')) {
+            document.getElementById('windowname').innerText = '2 Window.name: ' + window.name;
             show('2, mcf redirectURL。' + sessionStorage.getItem(my_path));
+            debug({ stage: 'deeplink' });
             timeout().then(() => {
                 // 3, from mcf redirect
                 location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
             });
         } else if (params.get('token')) {
+            document.getElementById('windowname').innerText = '3 Window.name: ' + window.name;
             show('3, app back: ' + sessionStorage.getItem(my_path));
+            debug({ stage: 'token' });
             timeout().then(() => {
                 document.getElementById('token').innerText = '4, Token: ' + params.get('token');
             });
