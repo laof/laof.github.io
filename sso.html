@@ -17,7 +17,7 @@
         const timeout = () => new Promise(res => {
             setTimeout(() => {
                 res('done')
-            }, 1000);
+            }, 2000);
         })
 
         function show(message) {
@@ -25,7 +25,7 @@
         }
 
         if (params.get('path')) {
-            show('path: ' + params.get('path'))
+            show('1, set path: ' + params.get('path'))
             timeout().then(() => {
                 sessionStorage.setItem('my_path', params.get('path'));
                 // const logout = 'https://api.emmuat.asia.manulife.com/ext/nest-connect-gatewayd/ssologout';
@@ -33,13 +33,13 @@
                 location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
             });
         } else if (params.get('deeplink')) {
-            show('deeplink: ')
+            show('2, deeplink: ' + sessionStorage.getItem('my_path'));
             timeout().then(() => {
                 // 3, from mcf redirect
                 location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
             });
         } else if (params.get('token')) {
-            show('token: ' + params.get('token'))
+            show('3, deeplink: ' + sessionStorage.getItem('my_path'));
             timeout().then(() => {
                 show('ok my_path : ' + sessionStorage.getItem('my_path'));
             });
