@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> sso validate page</h1>
+    <div id="showlog"></div>
+    <script>
+        const search = window.location.search;
+        const params = new URLSearchParams(search);
+
+        const timeout = () => new Promise(res => {
+            setTimeout(() => {
+                res('done')
+            }, 1000);
+        })
+
+        function show(message) {
+            document.getElementById('showlog').innerText = message;
+        }
+
+        if (params.get('path')) {
+            show('path: ' + params.get('path'))
+            timeout().then(() => {
+                sessionStorage.setItem('my_path', params.get('path'));
+                const logout = 'https://api.emmuat.asia.manulife.com/ext/nest-connect-gatewayd/ssologout';
+                location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
+            });
+        } else if (params.get('deeplink')) {
+            show('deeplink: ')
+            timeout().then(() => {
+                // 3, from mcf redirect
+                location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
+            });
+        } else if (params.get('token')) {
+            show('token: ' + params.get('token'))
+            timeout().then(() => {
+                show('ok my_path : ' + sessionStorage.getItem('my_path'));
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
