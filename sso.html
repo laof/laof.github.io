@@ -27,7 +27,6 @@
         if (params.get('path')) {
             show('1, set path: ' + params.get('path'))
             window.name = JSON.stringify({ my_path: params.get('path'), ts: Date.now() });
-            sessionStorage.setItem('oauthState', originState);
             document.getElementById('windowname').innerText = '1 Window.name: ' + window.name;
             timeout().then(() => {
                 sessionStorage.setItem(my_path, params.get('path'));
