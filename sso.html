@@ -16,7 +16,7 @@
         const params = new URLSearchParams(search);
         const my_path = 'my_path';
 
-        const timeout = () => new Promise(res => setTimeout(() => res('done'), 2000));
+        const timeout = () => new Promise(res => setTimeout(() => res('done'), 3000));
 
         function show(message) {
             document.getElementById('showlog').innerText = message;
@@ -30,7 +30,7 @@
                 location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
             });
         } else if (params.get('deeplink')) {
-            show('2, deeplink: ' + sessionStorage.getItem(my_path));
+            show('2, mcf redirectURL。' + sessionStorage.getItem(my_path));
             timeout().then(() => {
                 // 3, from mcf redirect
                 location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
