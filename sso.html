@@ -28,7 +28,8 @@
             show('path: ' + params.get('path'))
             timeout().then(() => {
                 sessionStorage.setItem('my_path', params.get('path'));
-                const logout = 'https://api.emmuat.asia.manulife.com/ext/nest-connect-gatewayd/ssologout';
+                // const logout = 'https://api.emmuat.asia.manulife.com/ext/nest-connect-gatewayd/ssologout';
+                const logout = 'https://daolang.netlify.app/ssologout'
                 location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
             });
         } else if (params.get('deeplink')) {
