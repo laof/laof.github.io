@@ -36,7 +36,7 @@
                 location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
             });
         } else if (params.get('token')) {
-            show('3, deeplink: ' + sessionStorage.getItem(my_path));
+            show('3, app back: ' + sessionStorage.getItem(my_path));
             timeout().then(() => {
                 document.getElementById('token').innerText = '4, Token: ' + params.get('token');
             });
