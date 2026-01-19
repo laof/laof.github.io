@@ -47,7 +47,7 @@
         } else if (params.get('state')) {
 
             const my = getcookie('my_state');
-            const state = getcookie('state');
+            const state = params.get('state');
 
             document.getElementById('showlog').innerText = 'Cookie: ' + document.cookie;
             document.getElementById('validate').innerText = 'validate : ' + (my === state);
