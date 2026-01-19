@@ -11,6 +11,7 @@
     <h1>in app</h1>
     <div id="showlog"></div>
     <div id="validate"></div>
+    <div id="test"></div>
     <script>
         const search = window.location.search;
         const params = new URLSearchParams(search);
@@ -44,8 +45,14 @@
             const value = setcookie();
             location.href = `com.manulife.hk.uat.sam4://openapp/get-token?my_state=${value}`;
         } else if (params.get('state')) {
+
+            const my = getcookie('my_state');
+            const state = getcookie('state');
+
             document.getElementById('showlog').innerText = 'Cookie: ' + document.cookie;
-            document.getElementById('validate').innerText = 'validate : ' + (getcookie('my_state') === params.get('state'));
+            document.getElementById('validate').innerText = 'validate : ' + (my === state);
+            document.getElementById('test').innerText = 'my: ' + my + ', state: ' + state;
+
         } else {
             document.getElementById('showlog').innerText = 'Cookie: ' + document.cookie;
         }
