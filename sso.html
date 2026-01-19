@@ -47,8 +47,11 @@
             showLocalStorage('showLocalStorage 2, url scheme。' + localStorage.getItem(my_path));
             timeout().then(() => {
                 // 3, from mcf redirect
+                setTimeout(() => {
+                    window.close();
+                }, 500)
                 location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
-                 window.close();
+       
                 // location.href = 'com.manulife.hk.uat.sam4://openapp/get-token';
             });
         } else if (params.get('token')) {
