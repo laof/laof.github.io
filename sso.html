@@ -36,7 +36,8 @@
                 sessionStorage.setItem(my_path, params.get('path'));
                 localStorage.setItem(my_path, params.get('path'));
                 const logout = 'https://daolang.netlify.app/ssologout'
-                location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
+                // 登陆完成回到当前页面
+                location.href = `${logout}?redirectURL=${location.origin}/sso?deeplink=openapp4`;
             });
         } else if (params.get('deeplink')) {
             document.getElementById('windowname').innerText = '2 Window.name: ' + window.name;
