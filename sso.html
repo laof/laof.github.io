@@ -10,6 +10,7 @@
 <body>
     <h1> sso validate page</h1>
     <div id="showlog"></div>
+    <div id="local_storage"></div>
     <div id="windowname"></div>
     <div id="token"></div>
     <script>
@@ -22,6 +23,9 @@
         function show(message) {
             document.getElementById('showlog').innerText = message;
         }
+        function showLocalStorage(message) {
+            document.getElementById('local_storage').innerText = message;
+        }
 
 
         if (params.get('path')) {
@@ -30,6 +34,7 @@
             document.getElementById('windowname').innerText = '1 Window.name: ' + window.name;
             timeout().then(() => {
                 sessionStorage.setItem(my_path, params.get('path'));
+                localStorage.setItem(my_path, params.get('path'));
                 const logout = 'https://daolang.netlify.app/ssologout'
                 location.href = `${logout}?redirectURL=https://laof.github.io/sso?deeplink=openapp4`;
             });
@@ -37,6 +42,7 @@
             document.getElementById('windowname').innerText = '2 Window.name: ' + window.name;
             // show('2, mcf redirectURL。' + sessionStorage.getItem(my_path));
             show('2, url scheme。' + sessionStorage.getItem(my_path));
+            showLocalStorage('showLocalStorage 2, url scheme。' + localStorage.getItem(my_path));
             timeout().then(() => {
                 // 3, from mcf redirect
                 // location.href = 'https://lttesting.manutouch.com.hk/openapp/uat4/get-token';
@@ -49,6 +55,7 @@
             const path = saved.my_path;
             document.getElementById('windowname').innerText = '3 Window.name: ' + path;
             show('3, app back: ' + sessionStorage.getItem(my_path));
+            showLocalStorage('showLocalStorage 3, app back: ' + localStorage.getItem(my_path));
             timeout().then(() => {
                 document.getElementById('token').innerText = '4, Token: ' + params.get('token');
             });
