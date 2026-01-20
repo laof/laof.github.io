@@ -55,6 +55,8 @@
             document.getElementById('test').innerText = 'my: ' + my + ', state: ' + state;
 
         } else {
+
+            document.getElementById('test').innerText =  sessionStorage.getItem(my_path);
             document.getElementById('showlog').innerText = 'Cookie: ' + document.cookie;
         }
 
