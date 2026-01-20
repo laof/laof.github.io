@@ -43,6 +43,7 @@
 
         if (params.get('setcookie')) {
             const value = setcookie();
+            sessionStorage.setItem(my_path, 'in-app-path' + value);
             location.href = `com.manulife.hk.uat.sam4://openapp/get-token?my_state=${value}`;
         } else if (params.get('state')) {
 
