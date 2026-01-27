@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create State</title>
+</head>
+
+<body>
+    <h1>create State Page</h1>
+    <script>
+
+
+        const timeout = new Promise((res) => setTimeout(res, 1000))
+
+        timeout.then(() => {
+            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token';
+        });
+
+        var channel = new BroadcastChannel('tab-close');
+        channel.onmessage = function (event) {
+            if (event.data === 'close-tab') {
+                window.close();
+            }
+        };
+    </script>
+</body>
+
+</html>
