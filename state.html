@@ -11,11 +11,10 @@
     <h1>create State Page</h1>
     <script>
 
-
-        const timeout = new Promise((res) => setTimeout(res, 1000))
+        var timeout = new Promise((res) => setTimeout(res, 1000))
 
         timeout.then(() => {
-            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token';
+            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?code=12345&state=abcdefg';
         });
 
         var channel = new BroadcastChannel('tab-close');
