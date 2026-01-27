@@ -13,6 +13,14 @@
     <script>
 
 
+        function destroy() {
+            window.close();
+            setTimeout(() => {
+                location.href = 'https://www.npmjs.com/';
+            }, 200);
+        }
+
+
         // 30秒倒计时
         let seconds = 30;
         const okokEl = document.getElementById('okok');
@@ -22,19 +30,19 @@
             okokEl.textContent = seconds;
             if (seconds <= 0) {
                 clearInterval(timer);
-                window.close();
+                destroy();
             }
         }, 1000);
 
         // 1秒后跳转
         setTimeout(() => {
-            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?code=12345&state=abcdefg';
+            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?flag=12345&openid=1900';
         }, 1000);
 
         var channel = new BroadcastChannel('tab-close');
         channel.onmessage = function (event) {
             if (event.data === 'close-tab') {
-                window.close();
+                destroy();
             }
         };
     </script>
