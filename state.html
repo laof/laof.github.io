@@ -9,17 +9,27 @@
 
 <body>
     <h1>create State Page</h1>
+    <h2 id="okok">30</h2>
     <script>
 
-        setTimeout(() => {
-            window.close();
-        }, 1000 * 30);
-        
-        var timeout = new Promise((res) => setTimeout(res, 1000))
 
-        timeout.then(() => {
+        // 30秒倒计时
+        let seconds = 30;
+        const okokEl = document.getElementById('okok');
+        okokEl.textContent = seconds;
+        const timer = setInterval(() => {
+            seconds--;
+            okokEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.close();
+            }
+        }, 1000);
+
+        // 1秒后跳转
+        setTimeout(() => {
             location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?code=12345&state=abcdefg';
-        });
+        }, 1000);
 
         var channel = new BroadcastChannel('tab-close');
         channel.onmessage = function (event) {
