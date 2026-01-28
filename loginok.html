@@ -10,7 +10,7 @@
 <body>
     <h1 style="background-color: #52a752; padding: 6px; color: white;"> ePos landing page</h1>
 
-    <h3>welcome :  <span></span></h3>
+    <h3>welcome :  <span id="name"></span></h3>
 
     <br>
     <br>
@@ -23,7 +23,7 @@
     <a href="https://daolang.netlify.app/landing">sso M Mobile</a>
 
     <script>
-        document.querySelector('h1') = sessionStorage.getItem('epos_sso_login_timestamp') || '';
+        document.querySelector('#name').textContent = sessionStorage.getItem('epos_sso_login_timestamp') || '';
     </script>
 </body>
 
