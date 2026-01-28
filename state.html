@@ -4,47 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create State</title>
+    <title>create state</title>
 </head>
 
 <body>
-    <h1>create State Page</h1>
-    <h2 id="okok">30</h2>
+    <h1>ePos API : create State ....</h1>
     <script>
-
-
-        function destroy() {
-            window.close();
+        Promise.resolve().then(() => {
+            // 1秒后跳转
             setTimeout(() => {
-                location.href = 'https://www.npmjs.com/';
-            }, 200);
-        }
+                location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?state=12345&openid=1900';
+            }, 1000);
 
-
-        // 30秒倒计时
-        let seconds = 30;
-        const okokEl = document.getElementById('okok');
-        okokEl.textContent = seconds;
-        const timer = setInterval(() => {
-            seconds--;
-            okokEl.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(timer);
-                destroy();
-            }
-        }, 1000);
-
-        // 1秒后跳转
-        setTimeout(() => {
-            location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?state=12345&openid=1900';
-        }, 1000);
-
-        var channel = new BroadcastChannel('tab-close');
-        channel.onmessage = function (event) {
-            if (event.data === 'close-tab') {
-                destroy();
-            }
-        };
+        })
     </script>
 </body>
 
