@@ -12,7 +12,7 @@
     <h3>set mcf cookie epos</h3>
     <h2 id="countdown"></h2>
     <form method="post" action="https://daolang.netlify.app/epo">
-        <input style="width: 90%; display: block;" width="100%" value="fdsfdasfa_lovalong_232" name="token">
+        <input style="width: 90%; display: block;" width="100%" value="" name="token">
         <br><br>
         <button type="submit">submit</button>
     </form>
