@@ -9,17 +9,21 @@
 
 <body>
     <h1>epos-sso-login success page</h1>
-    <h3>mcf set cookie by form </h3>
-    <h2 id="countdown"></h2>
-    <form method="post" action="https://daolang.netlify.app/epo">
+    <div>form POST /mcf (set mcf cookie)</div>
+    <form method="post" action="https://daolang.netlify.app/mcf">
+        <h3>token</h3>
         <input style="width: 90%; display: block;" width="100%" value="" name="token">
         <br><br>
+        <input style="display: none;" style="width: 90%; display: block;" width="100%"
+            value="https://laof.github.io/loginok" name="location">
         <button type="submit">submit</button>
+        <div id="countdown"></div>
     </form>
 
     <script>
         const h2 = document.querySelector('#countdown');
         const form = document.querySelector('form');
+        let token = '';
 
         const tokenInput = form?.querySelector('input[name="token"]');
         if (tokenInput) {
@@ -29,12 +33,13 @@
             const ss = pad2(now.getSeconds());
             const mm = pad2(now.getMinutes());
             const SS = pad2(Math.floor(now.getMilliseconds() / 10));
-            tokenInput.value = `epos_token_${hh}_${ss}_${mm}_${SS}`;
+            token = `_${hh}_${ss}_${mm}_${SS}`;
+            tokenInput.value = `mcf_cookie_____` + token;
         }
 
         let remaining = 3;
         const render = () => {
-            h2.textContent = `${remaining} 秒后自动提交...`;
+            h2.textContent = `${remaining} 秒后自动提交... `;
         };
 
         render();
@@ -53,6 +58,8 @@
 
                 clearInterval(timer);
                 h2.textContent = '正在提交...';
+
+                sessionStorage.setItem('epos_sso_login_timestamp', 'epos__sessionStorage___token___' + tokenInput.value);
 
                 if (typeof form.requestSubmit === 'function') {
                     form.requestSubmit();
