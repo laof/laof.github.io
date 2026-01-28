@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    <h1>epos-sso-login success page -> post call mcf redirect ->  epos landing</h1>
+    <h1>epos-sso-login page</h1>
+    <div>epos-sso-login success page -> post call mcf redirect ->  epos landing</div>
+    <br>
     <div>form POST /mcf (set mcf cookie)</div>
     <form method="post" action="https://daolang.netlify.app/mcf">
         <h4 id="show-token"></h4>
@@ -46,7 +48,7 @@
 
         let remaining = location.href.indexOf('https:') === 0 ? 3 : 50000000;
         const render = () => {
-            h2.textContent = `${remaining} 秒后自动提交... `;
+            h2.textContent = `${remaining} 秒后自动提交... call mcf to set cookie`;
         };
 
         render();
