@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>epos-sso-login</title>
 </head>
 
 <body>
-
-    <h1>epos-login && set mcf cookie epos</h1>
+    <h1>epos-sso-login success page</h1>
+    <h3>set mcf cookie epos</h3>
     <h2 id="countdown"></h2>
     <form method="post" action="https://daolang.netlify.app/epo">
         <input style="width: 90%; display: block;" width="100%" value="fdsfdasfa_lovalong_232" name="token">
