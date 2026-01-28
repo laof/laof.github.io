@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>epos-login && set mcf cookie epos</h1>
+    <h2 id="countdown"></h2>
+    <form method="post" action="https://daolang.netlify.app/epo">
+        <input style="width: 90%; display: block;" width="100%" value="fdsfdasfa_lovalong_232" name="token">
+        <br><br>
+        <button type="submit">submit</button>
+    </form>
+
+    <script>
+        const h2 = document.querySelector('#countdown');
+        const form = document.querySelector('form');
+
+        const tokenInput = form?.querySelector('input[name="token"]');
+        if (tokenInput) {
+            const pad2 = (n) => String(n).padStart(2, '0');
+            const now = new Date();
+            const hh = pad2(now.getHours());
+            const ss = pad2(now.getSeconds());
+            const mm = pad2(now.getMinutes());
+            const SS = pad2(Math.floor(now.getMilliseconds() / 10));
+            tokenInput.value = `epos_token_${hh}_${ss}_${mm}_${SS}`;
+        }
+
+        let remaining = 3;
+        const render = () => {
+            h2.textContent = `${remaining} 秒后自动提交...`;
+        };
+
+        render();
+
+
+        Promise.resolve().then(() => {
+            if (typeof window.scrollTo === 'function') {
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+            const timer = setInterval(() => {
+                remaining -= 1;
+                if (remaining > 0) {
+                    render();
+                    return;
+                }
+
+                clearInterval(timer);
+                h2.textContent = '正在提交...';
+
+                if (typeof form.requestSubmit === 'function') {
+                    form.requestSubmit();
+                } else {
+                    form.submit();
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
