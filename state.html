@@ -10,13 +10,10 @@
 <body>
     <h1>ePos API : create State ....</h1>
     <script>
-        Promise.resolve().then(() => {
-            // 1秒后跳转
-            setTimeout(() => {
-                location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?state=12345&openid=1900';
-            }, 1000);
-
-        })
+     
+     location.href = 'com.manulife.hk.uat.sam4://openapp/get-token?state=12345&openid=1900';
+     window.location.replace("about:blank");
+   
     </script>
 </body>
 
