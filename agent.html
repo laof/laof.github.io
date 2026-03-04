@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-agent</title>
+</head>
+
+<body>
+    web:
+    <p id="v1"></p>
+    app:
+    <p id="v2"></p>
+    OK:
+    <div id="ok"></div>
+
+    <script>
+        var app = decodeURIComponent(location.href.split("?userAgent=")[1] || '');
+        document.querySelector('#v1').textContent = navigator.userAgent;
+        document.querySelector('#v2').textContent = app;
+        document.querySelector('#ok').textContent = navigator.userAgent === app;
+    </script>
+</body>
+
+</html>
