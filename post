@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>last_login_channel</h1>
+    <button onclick="loginChannel.postMessage({ message: 'last_login_channel' })">postMessage</button>
+    <div id="value"></div>
+    <script>
+        var index = 0;
+        var loginChannel = new BroadcastChannel('last_login_channel');
+        loginChannel.addEventListener('message', (event) => {
+            document.querySelector('#value').innerHTML = ['', ++index, JSON.stringify(event.data), new Date().toLocaleString()].join('<br>');
+        });
+    </script>
+</body>
+
+</html>
