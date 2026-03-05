@@ -11,14 +11,23 @@
 <body>
     <h1>last_login_channel</h1>
     <button onclick="loginChannel.postMessage({ message: 'last_login_channel' })">postMessage</button>
+    <button onclick="localStorage.setItem('1',new Date().toLocaleTimeString())">localStorage</button>
     <div id="value"></div>
     <script>
         var index = 0;
         var loginChannel = new BroadcastChannel('last_login_channel');
         loginChannel.addEventListener('message', (event) => {
             document.querySelector('#value').innerHTML = ['', ++index, JSON.stringify(event.data), new Date().toLocaleString()].join('<br>');
-            document.title = index;
+            document.title = 'c-' + index;
         });
+
+
+
+        window.addEventListener('storage', function (event) {
+            document.title = 's_' + (++index);
+        });
+
+
     </script>
 </body>
 
