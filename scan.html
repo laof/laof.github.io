@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px 16px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        #scanner-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        #video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Scanning overlay */
+        #overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .scan-frame {
+            width: 220px;
+            height: 220px;
+            position: relative;
+        }
+
+        .scan-frame::before,
+        .scan-frame::after,
+        .scan-frame > span::before,
+        .scan-frame > span::after {
+            content: '';
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            border-color: #00e5ff;
+            border-style: solid;
+        }
+
+        .scan-frame::before  { top: 0;    left: 0;  border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
+        .scan-frame::after   { top: 0;    right: 0; border-width: 3px 3px 0 0; border-radius: 0 4px 0 0; }
+        .scan-frame > span::before { bottom: 0; left: 0;  border-width: 0 0 3px 3px; border-radius: 0 0 0 4px; }
+        .scan-frame > span::after  { bottom: 0; right: 0; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
+
+        /* Scanning line animation */
+        .scan-line {
+            position: absolute;
+            left: 4px;
+            right: 4px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0%   { top: 4px;   opacity: 1; }
+            50%  { top: calc(100% - 6px); opacity: 1; }
+            100% { top: 4px;   opacity: 1; }
+        }
+
+        #status {
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: #aaa;
+            text-align: center;
+        }
+
+        #result-box {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 16px;
+            display: none;
+        }
+
+        #result-box .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        #result-text {
+            font-size: 1rem;
+            word-break: break-all;
+            color: #00e5ff;
+        }
+
+        #result-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: #00e5ff;
+            color: #000;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        #btn-copy {
+            display: none;
+            margin-top: 10px;
+            margin-left: 8px;
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid #444;
+            color: #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        #btn-copy:hover { background: #333; }
+        #btn-copy.copied { border-color: #00e5ff; color: #00e5ff; }
+
+        canvas { display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>QR Code Scanner</h1>
+
+    <div id="scanner-wrapper">
+        <video id="video" playsinline autoplay muted></video>
+        <div id="overlay">
+            <div class="scan-frame">
+                <span></span>
+                <div class="scan-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <p id="status">正在启动相机…</p>
+
+    <div id="result-box">
+        <div class="label">扫描结果</div>
+        <div id="result-text"></div>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:12px;">
+            <a id="result-link" target="_blank" rel="noopener noreferrer" style="display:none">打开链接</a>
+            <button id="btn-copy">复制</button>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <!-- jsQR: lightweight pure-JS QR decoder, no server needed -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script>
+        const video      = document.getElementById('video');
+        const canvas     = document.getElementById('canvas');
+        const ctx        = canvas.getContext('2d');
+        const status     = document.getElementById('status');
+        const resultBox  = document.getElementById('result-box');
+        const resultText = document.getElementById('result-text');
+        const resultLink = document.getElementById('result-link');
+        const btnCopy    = document.getElementById('btn-copy');
+
+        // Debounce: 同一内容至少间隔 2s 才再次更新，避免结果闪烁
+        let lastText   = '';
+        let lastTime   = 0;
+        const DEBOUNCE = 2000;
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: { ideal: 'environment' } }
+                });
+                video.srcObject = stream;
+                video.addEventListener('loadedmetadata', () => {
+                    status.textContent = '请将二维码对准框内';
+                    tick();
+                });
+            } catch (err) {
+                status.textContent = '无法访问相机：' + err.message;
+            }
+        }
+
+        function tick() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.width  = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                    inversionAttempts: 'dontInvert'
+                });
+
+                if (code) {
+                    const now = Date.now();
+                    if (code.data !== lastText || now - lastTime > DEBOUNCE) {
+                        lastText = code.data;
+                        lastTime = now;
+                        showResult(code.data);
+                    }
+                }
+            }
+            requestAnimationFrame(tick);
+        }
+
+        function showResult(text) {
+            status.textContent = '✅ 识别成功！';
+            resultText.textContent = text;
+            resultBox.style.display = 'block';
+
+            if (/^https?:\/\//i.test(text)) {
+                resultLink.href = text;
+                resultLink.style.display = 'inline-block';
+            } else {
+                resultLink.style.display = 'none';
+            }
+
+            btnCopy.style.display = 'inline-block';
+        }
+
+        btnCopy.addEventListener('click', async () => {
+            const text = resultText.textContent;
+            if (!text) return;
+            try {
+                await navigator.clipboard.writeText(text);
+            } catch {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            btnCopy.textContent = '已复制 ✓';
+            btnCopy.classList.add('copied');
+            setTimeout(() => {
+                btnCopy.textContent = '复制';
+                btnCopy.classList.remove('copied');
+            }, 2000);
+        });
+
+        startCamera();
+    </script>
+</body>
+</html>
