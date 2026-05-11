@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Header & First Column Table</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .table-wrapper {
+      max-width: 100%;
+      max-height: 80vh;
+      overflow: auto;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      background: #fff;
+      position: relative;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 3500px;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      border-right: 1px solid #e1e4e8;
+      border-bottom: 1px solid #e1e4e8;
+      word-break: break-word;
+      text-align: left;
+      line-height: 26px;
+      font-size: 13px;
+      background: #fff;
+    }
+
+    /* Sticky cells share base styles; offsets are set dynamically via inline style. */
+    .sticky-col {
+      position: sticky;
+      background: #f6f8fa;
+      z-index: 1;
+    }
+
+    /* Header row sticky on top */
+    thead th {
+      position: sticky;
+      top: 0;
+      background: #f6f8fa;
+      font-size: 16px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    /* Header cells that are also sticky columns need to beat row-stickies */
+    thead th.sticky-col {
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Sticky Table — configurable frozen columns  max-width: 3500px</h2>
+  <p style="font-size:13px;color:#57606a;">
+    Frozen columns: <input id="frozen-input" type="number" min="0" max="10" value="1" style="width:60px;" />
+    <button id="apply-btn">Apply</button>
+  </p>
+  <div class="table-wrapper">
+    <table id="data-table">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    (function () {
+      const ROWS = 100;
+      const COLS = 30;
+      let FROZEN_COLS = 1; // dynamic; can be changed at runtime
+
+      const table = document.getElementById('data-table');
+      const thead = table.querySelector('thead');
+      const tbody = table.querySelector('tbody');
+
+      const WORDS = [
+        'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing',
+        'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore',
+        'magna', 'aliqua', 'enim', 'minim', 'veniam', 'quis', 'nostrud',
+        'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea',
+        'commodo', 'consequat', 'duis', 'aute', 'irure', 'reprehenderit',
+        'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur',
+        'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt',
+        'culpa', 'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum',
+      ];
+
+      let seed = 1;
+      const rand = () => {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280;
+      };
+      const randInt = (min, max) => Math.floor(rand() * (max - min + 1)) + min;
+
+      const makeCell = () => {
+        const n = randInt(1, 5);
+        const parts = [];
+        for (let i = 0; i < n; i++) {
+          // ~30% chance of a number token, otherwise a word
+          if (rand() < 0.3) {
+            parts.push(String(randInt(0, 9999)));
+          } else {
+            parts.push(WORDS[randInt(0, WORDS.length - 1)]);
+          }
+        }
+        return parts.join(' ');
+      };
+
+      // Build header row (total COLS + 1 because of leading row-label column)
+      const buildTable = () => {
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
+        seed = 1;
+
+        const makeHeader = (c) => {
+          const n = randInt(1, 4);
+          const parts = ['Col' + c];
+          for (let i = 0; i < n; i++) {
+            parts.push(WORDS[randInt(0, WORDS.length - 1)]);
+          }
+          return parts.join(' ');
+        };
+
+        const headRow = document.createElement('tr');
+        const corner = document.createElement('th');
+        corner.textContent = '#';
+        headRow.appendChild(corner);
+        for (let c = 1; c <= COLS; c++) {
+          const th = document.createElement('th');
+          th.textContent = makeHeader(c);
+          headRow.appendChild(th);
+        }
+        thead.appendChild(headRow);
+
+        const frag = document.createDocumentFragment();
+        for (let r = 1; r <= ROWS; r++) {
+          const tr = document.createElement('tr');
+          const rowHead = document.createElement('th');
+          rowHead.textContent = 'Row ' + r;
+          tr.appendChild(rowHead);
+          for (let c = 1; c <= COLS; c++) {
+            const td = document.createElement('td');
+            td.textContent = makeCell(r, c);
+            tr.appendChild(td);
+          }
+          frag.appendChild(tr);
+        }
+        tbody.appendChild(frag);
+      };
+
+      /**
+       * Apply sticky styling to the first N columns.
+       * Strategy:
+       *  1. Clear previous sticky classes / inline left styles.
+       *  2. Measure each frozen column's width via the header row cells.
+       *  3. Mark every cell in those columns with `.sticky-col` and set `left` offset
+       *     to the accumulated width of preceding frozen columns.
+       *  4. Mark the last frozen column with `.sticky-col-last` so we can draw a divider.
+       */
+      const applyFrozen = (n) => {
+        const allRows = table.querySelectorAll('tr');
+        // 1) Reset
+        allRows.forEach((tr) => {
+          [...tr.children].forEach((cell) => {
+            cell.classList.remove('sticky-col', 'sticky-col-last');
+            cell.style.left = '';
+          });
+        });
+
+        if (n <= 0) return;
+
+        const headerCells = thead.querySelectorAll('tr > *');
+        const maxN = Math.min(n, headerCells.length);
+
+        // 2) Measure widths of the first maxN header cells
+        const widths = [];
+        for (let i = 0; i < maxN; i++) {
+          widths.push(headerCells[i].getBoundingClientRect().width);
+        }
+
+        // 3) Apply sticky to corresponding cell index in every row
+        const offsets = [];
+        let acc = 0;
+        for (let i = 0; i < maxN; i++) {
+          offsets.push(acc);
+          acc += widths[i];
+        }
+
+        allRows.forEach((tr) => {
+          for (let i = 0; i < maxN; i++) {
+            const cell = tr.children[i];
+            if (!cell) continue;
+            cell.classList.add('sticky-col');
+            cell.style.left = offsets[i] + 'px';
+            if (i === maxN - 1) cell.classList.add('sticky-col-last');
+          }
+        });
+      };
+
+      const refresh = () => {
+        // Re-measure after layout settles
+        requestAnimationFrame(() => applyFrozen(FROZEN_COLS));
+      };
+
+      buildTable();
+      refresh();
+
+      // Re-apply on resize (column widths may change)
+      window.addEventListener('resize', refresh);
+
+      // Interactive control
+      const input = document.getElementById('frozen-input');
+      const btn = document.getElementById('apply-btn');
+      btn.addEventListener('click', () => {
+        const v = parseInt(input.value, 10);
+        FROZEN_COLS = Number.isFinite(v) && v >= 0 ? v : 0;
+        refresh();
+      });
+    })();
+  </script>
+</body>
+</html>
