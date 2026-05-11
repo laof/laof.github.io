@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +66,7 @@
   </style>
 </head>
 <body>
-  <h2>Sticky Table — configurable frozen columns  max-width: 3500px</h2>
+  <h2>Sticky Table — configurable frozen columns  max-width: 3500px。第4列固定宽50px</h2>
   <h3>TEST</h3>
   <h3>TEST</h3>
   <h3>TEST</h3>
@@ -79,6 +80,7 @@
   </p>
   <div class="table-wrapper">
     <table id="data-table">
+      <colgroup id="data-colgroup"></colgroup>
       <thead></thead>
       <tbody></tbody>
     </table>
@@ -131,6 +133,19 @@
         thead.innerHTML = '';
         tbody.innerHTML = '';
         seed = 1;
+
+        // Build colgroup: index 0 = row-label column; specific columns can be pinned to fixed width.
+        // Column 4 (1-based, data column) → DOM index 4 in the colgroup (because index 0 is row-label).
+        const colgroup = document.getElementById('data-colgroup');
+        colgroup.innerHTML = '';
+        const FIXED_WIDTHS = { 4: '50px' }; // data column index (1-based) → width
+        const rowLabelCol = document.createElement('col');
+        colgroup.appendChild(rowLabelCol);
+        for (let c = 1; c <= COLS; c++) {
+          const col = document.createElement('col');
+          if (FIXED_WIDTHS[c]) col.style.width = FIXED_WIDTHS[c];
+          colgroup.appendChild(col);
+        }
 
         const makeHeader = (c) => {
           const n = randInt(1, 4);
