@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overscroll-behavior-y: auto;
+        }
+        .page-block {
+            margin: 16px;
+        }
+
+        .inner-scroll {
+            height: 800px;
+            overflow-y: auto;
+            background-color: #f0f0f0;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: auto;
+            touch-action: pan-y;
+        }
+
+        .inner-content {
+            height: 7200px;
+            background-color: rgb(224, 222, 222);
+        }
+    </style>
 </head>
 <body>
 
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <div style="height: 600px; overflow-y: auto; background-color: #f0f0f0;-webkit-overflow-scrolling: touch;overscroll-behavior-y: contain;">
-        <div style="height: 7200px; background-color:rgb(224, 222, 222);"></div>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <div class="inner-scroll page-block">
+        <div class="inner-content">2121</div>
     </div>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
-    <h1>fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
+    <h1 class="page-block">fsdafadf</h1>
 </body>
+
 </html>
