@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    
-</head>
-<body>
-    
-   <h1>回调 打开新页签window.open， 针对safari 的测试 </h1>
-   <button onclick="openwin()">click</button>
 
-   <pre><code>
+</head>
+
+<body>
+
+    <h1>回调 打开新页签window.open， 针对safari 的测试 </h1>
+    <button onclick="openwin()">click</button>
+
+    <pre><code>
         function openwin (){
                 fetch("https://laof.github.io/page.json").then(response => response.json())
                 .then(data => {
                  console.log(data);
-                 window.open('https://www.baidu.com', '_blank');
+                 window.open(data[0].link, '_blank');
                 });
           }
    </code></pre>
 
     <script>
 
-        function openwin (){
+        function openwin() {
             fetch("https://laof.github.io/page.json").then(response => response.json())
-            .then(data => {
-                console.log(data);
-                window.open('https://www.baidu.com', '_blank');
-            });
+                .then(data => {
+                    console.log(data);
+                    window.open(data[0].link, '_blank');
+                });
         }
 
     </script>
 </body>
+
 </html>
