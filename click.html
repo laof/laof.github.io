@@ -9,8 +9,18 @@
 </head>
 <body>
     
-    <h1>回调 打开新页签window.open， 正对safari 的测试 </h1>
+   <h1>回调 打开新页签window.open， 针对safari 的测试 </h1>
    <button onclick="openwin()">click</button>
+
+   <pre><code>
+        function openwin (){
+                fetch("https://laof.github.io/page.json").then(response => response.json())
+                .then(data => {
+                 console.log(data);
+                 window.open('https://www.baidu.com', '_blank');
+                });
+          }
+   </code></pre>
 
     <script>
 
